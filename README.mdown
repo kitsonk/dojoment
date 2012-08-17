@@ -1,0 +1,33 @@
+# dojoment #
+
+*dojoment* is an experimental project looking at the possibility of a markdown based community editable documentation wiki which can be used instead of the current solution which is based on reStructuredText.
+
+The main objectives of this project are:
+* Base the entire solution on JavaScript (because that is what we are about)
+* Leverage as much of the Dojo Toolkit as possible (eat our own dogfood)
+* Adopt markdown as the primary markup
+* Extend the markdown syntax, if required, to provide live examples
+* Provide a community editable wiki
+* Make it easier to generate final documentation for the website
+* Fully integrate into git and GitHub for documentation storage
+* Assess the suitability to be able to create Dojo Tutorials
+* Align better with the Dojo Inline Documentation Parser
+
+## Licensing ##
+
+This is released under the same "New" BSD License as the Dojo Toolkit:
+* [The "New" BSD License][bsd]
+
+(Note: It is not licensed under the AFL 2.1)
+
+Additional libraries are licensed and copyrighted by their respective owners.
+
+## Requirements ##
+
+*TODO*
+
+## Installation ##
+
+*TODO*
+
+[bsd]: http://bugs.dojotoolkit.org/browser/dojo/trunk/LICENSE#L13
