@@ -10,6 +10,6 @@
 [submodule "src/util"]
 	path = src/util
 	url = https://github.com/dojo/util.git
-[submodule "node_modules/marked"]
-	path = node_modules/marked
-	url = https://github.com/chjj/marked.git
+[submodule "refdocs"]
+	path = refdocs
+	url = git@github.com:kitsonk/refdocs.git
