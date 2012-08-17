@@ -1,0 +1,19 @@
+{
+	"name": "dojoment",
+	"version":"1.0",
+	"directories": {
+		"src": "./src"
+	},
+	"main": "server",
+	"description": "",
+	"licenses": [
+		 {
+				 "type": "BSD",
+				 "url": "http://trac.dojotoolkit.org/browser/dojo/trunk/LICENSE#L13"
+		 }
+	],
+	"bugs": "https://github.com/kitsonk/dojoment/issues",
+	"keywords": ["JavaScript", "Dojo", "Documentation", "Wiki"],
+	"homepage": "https://github.com/kitsonk/dojoment/",
+	"dojoBuild": "dojoment.profile.js"
+}
