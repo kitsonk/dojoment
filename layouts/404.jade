@@ -1,0 +1,17 @@
+extends main
+
+prepend head
+  title = "404 - Resource Not Found"
+
+block content
+  h1 Resource Not Found
+  #resource The requested resource 
+    code= url
+    |  was not found.
+    p
+      | It might be easier to go back to the 
+      a(href="/") homepage
+      |  and try again. Sorry...
+
+block footer
+  include serversig

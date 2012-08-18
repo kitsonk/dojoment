@@ -1,0 +1,11 @@
+extends main
+
+prepend head
+  title = "500 - Internal Error"
+
+block content
+  h1 Error: #{error.message}
+  pre= error.stack
+
+block footer
+  include serversig
