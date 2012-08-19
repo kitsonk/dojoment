@@ -3,10 +3,24 @@ require([
 	"dojo/node!express",
 	"dojo/node!jade",
 	"dojo/node!marked",
+	"dojo/node!highlight.js",
 	"dojoment-server/dfs"
-], function(util, express, jade, marked, dfs){
+], function(util, express, jade, marked, hljs, dfs){
 	var app = express(),
 		appPort = process.env.PORT || 8002;
+
+	// Configure marked
+	marked.setOptions({
+		gfm: true,
+		pendantic: false,
+		highlight: function(code, lang){
+			if(lang == "js"){
+				code = hljs.highlight("javascript", code).value;
+			}
+			console.log(code, lang);
+			return code;
+		}
+	});
 
 	// Configure the application
 	app.configure(function(){
@@ -49,14 +63,23 @@ require([
 		});
 	});
 
-	app.get("/:doc", function(request, response, next){
-		if(request.params.doc == "404"){
+	app.get("/*", function(request, response, next){
+		if(request.params[0] == "404" || /^_static/.test(request.params[0])){
 			next();
 		}else{
-			dfs.readFile("refdocs/index.mdown", "utf8").then(function(data){
-				response.render("wiki", {
-					md: marked(data)
-				});
+			var doc = "refdocs/" + request.params[0] + ".mdown";
+			dfs.exists(doc).then(function(exists){
+				if(exists){
+					dfs.readFile(doc, "utf8").then(function(data){
+						response.render("wiki", {
+							md: marked(data)
+						});
+					}, function(err){
+						next(err);
+					});
+				}else{
+					next();
+				}
 			}, function(err){
 				next(err);
 			});

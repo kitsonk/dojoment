@@ -24,10 +24,37 @@ Additional libraries are licensed and copyrighted by their respective owners.
 
 ## Requirements ##
 
-*TODO*
+* [Node.js][nodejs] - Requires v0.8 or later
+* [Dojo Toolkit][dojo] - Requires v1.8.0 or later
+* [express][express] - Requires v3.0.0 or later
+* [jade][jade] - Requires v0.27.2 or later
+* [marked][marked] - Requires v0.2.5 or later
+* [highlight.js][hljs] - Requires v7.1.0 or later
 
 ## Installation ##
 
-*TODO*
+*Experimental* does mean experimental, this is under heavy development and I may not remember to update the `README` every time.
+
+* Clone the repository recursively:
+
+	git clone --recursive https://github.com/kitsonk/dojoment.git
+
+* Update the `config.json`.
+* Update the reference docs repository:
+
+	cd dojoment/refdocs
+	git pull
+
+* Start the server:
+
+	cd ..
+	node server.js
+
+You will get a message indicating that the server is running and what port it is running on.
 
 [bsd]: http://bugs.dojotoolkit.org/browser/dojo/trunk/LICENSE#L13
+[nodejs]: http://nodejs.org/download/
+[dojo]: http://dojotoolkit.org/download/
+[express]: http://expressjs.com/
+[marked]: https://github.com/chjj/marked/
+[hljs]: http://softwaremaniacs.org/soft/highlight/en/
