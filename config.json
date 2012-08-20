@@ -1,4 +1,16 @@
 {
-	"logsEnabled": 0,
-	"copyright": "Copyright the Dojo Toolkit 2004-2012"
+	"logging": {
+		"enabled": 0
+	},
+	"repoInfo": {
+		"basePath": "refdocs",
+		"rootUrl": "/",
+		"title": "Dojo Toolkit Reference Guide",
+		"copyright": "Copyright &copy; Dojo Toolkit 2004-2012"
+	},
+	"git": {
+		"pullEnabled": 0,
+		"updateUrl": "pull",
+		"updateKey": ""
+	}
 }

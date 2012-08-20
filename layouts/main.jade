@@ -2,10 +2,11 @@ doctype 5
 html
   head
     block head
-      title= title
+      title #{title}
 
     block css
       link(rel="stylesheet", type="text/css", href="/_static/css/wiki.css", media="all")
+      link(rel="stylesheet", type="text/css", href="/_static/css/highlight.css", media="all")
 
     block scripts
 

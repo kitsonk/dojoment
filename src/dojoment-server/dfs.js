@@ -12,7 +12,7 @@ define([
 				d.resolve(data);
 			});
 			f.apply(this, args);
-			return d;
+			return d.promise;
 		} : function(){
 			var d = new Deferred(),
 				args = Array.prototype.slice.call(arguments);
@@ -24,7 +24,7 @@ define([
 				}
 			});
 			f.apply(this, args);
-			return d;
+			return d.promise;
 		};
 	}
 
@@ -32,7 +32,7 @@ define([
 		singleArgFunctions = ["exists"];
 
 	// Iterate through each property of the module
-	for(var f in fs){ 
+	for(var f in fs){
 		if(typeof fs[f] == "function" && !/(^_|Sync$)/.test(f)){ // It is something we want to convert
 			dfs[f] = asDeferred(fs[f], ~singleArgFunctions.indexOf(f)); // Create a deferred
 		}

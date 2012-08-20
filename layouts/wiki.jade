@@ -1,7 +1,12 @@
 extends main
 
-prepend head
-  title = "Testing markdown"
+block header
+  .header Dojo Toolkit Live Reference Guide
 
 block content
-  div !{md}
+  .refdoc_wrap
+    .reftoc !{toc}
+    .refdoc !{doc}
+
+block footer
+  .copyright !{copyright}

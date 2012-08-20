@@ -6,6 +6,7 @@ var serverModule = "dojoment-server/main";
 dojoConfig = {
 	baseUrl: "src/",
 	async: 1,
+	deferredInstrumentation: 0,
 
 	hasCache: {
 		"host-node": 1,

@@ -2,30 +2,16 @@ require([
 	"dojo/node!util",
 	"dojo/node!express",
 	"dojo/node!jade",
-	"dojo/node!marked",
-	"dojo/node!highlight.js",
-	"dojoment-server/dfs"
-], function(util, express, jade, marked, hljs, dfs){
+	"dojoment-server/config",
+	"dojoment-server/dfs",
+	"dojoment-server/docutil"
+], function(util, express, jade, config, dfs, docutil){
 	var app = express(),
 		appPort = process.env.PORT || 8002;
-
-	// Configure marked
-	marked.setOptions({
-		gfm: true,
-		pendantic: false,
-		highlight: function(code, lang){
-			if(lang == "js"){
-				code = hljs.highlight("javascript", code).value;
-			}
-			console.log(code, lang);
-			return code;
-		}
-	});
 
 	// Configure the application
 	app.configure(function(){
 		app.locals.pretty = true;
-		app.locals.markdown = marked;
 		app.set("view engine", "jade");
 		app.set("views", "layouts");
 		app.use(express.cookieParser());
@@ -63,26 +49,27 @@ require([
 		});
 	});
 
+	// Main document handler
 	app.get("/*", function(request, response, next){
 		if(request.params[0] == "404" || /^_static/.test(request.params[0])){
 			next();
 		}else{
-			var doc = "refdocs/" + request.params[0] + ".mdown";
-			dfs.exists(doc).then(function(exists){
+			var docFileName = "refdocs/" + request.params[0] + (request.params[0] === "" ? "index.mdown" : /\/$/.test(request.params[0]) ? "index.mdown" : /.mdown$/i.test(request.params[0]) ? "" : ".mdown");
+			dfs.exists(docFileName).then(function(exists){
 				if(exists){
-					dfs.readFile(doc, "utf8").then(function(data){
+					return dfs.readFile(docFileName, "utf8").then(function(data){
+						var parsedDoc = docutil.parse(data);
 						response.render("wiki", {
-							md: marked(data)
+							title: parsedDoc.title,
+							toc: parsedDoc.toc,
+							doc: parsedDoc.doc,
+							copyright: config.repoInfo.copyright
 						});
-					}, function(err){
-						next(err);
 					});
 				}else{
 					next();
 				}
-			}, function(err){
-				next(err);
-			});
+			}).otherwise(next);
 		}
 	});
 
