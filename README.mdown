@@ -37,22 +37,30 @@ Additional libraries are licensed and copyrighted by their respective owners.
 
 * Clone the repository recursively:
 
-    git clone --recursive https://github.com/kitsonk/dojoment.git
+```bash
+git clone --recursive https://github.com/kitsonk/dojoment.git
+```
 
 * Update the `config.json`.
 * Update the reference docs repository:
 
-    cd dojoment/refdocs
-    git pull
+```bash
+cd dojoment/refdocs
+git pull
+```
 
 * Build the client library build:
 
-    cd ..
-    src/util/buildScripts/build.sh --profile dojoment.profile.js
+```bash
+cd ..
+src/util/buildScripts/build.sh --profile dojoment.profile.js
+```
 
 * Start the server:
 
-    node server.js
+```bash
+node server.js
+```
 
 You will get a message indicating that the server is running and what port it is running on.
 
