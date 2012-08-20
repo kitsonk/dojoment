@@ -12,4 +12,4 @@
 	url = https://github.com/dojo/util.git
 [submodule "refdocs"]
 	path = refdocs
-	url = git@github.com:kitsonk/refdocs.git
+	url = https://github.com/kitsonk/refdocs.git
