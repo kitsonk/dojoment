@@ -45,9 +45,13 @@ Additional libraries are licensed and copyrighted by their respective owners.
 	cd dojoment/refdocs
 	git pull
 
-* Start the server:
+* Build the client library build:
 
 	cd ..
+	src/util/buildScripts/build.sh --profile dojoment.profile.js
+
+* Start the server:
+
 	node server.js
 
 You will get a message indicating that the server is running and what port it is running on.
