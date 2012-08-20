@@ -1,14 +1,14 @@
 {
   "name": "dojoment",
-  "version": "1.0",
+  "version": "1.0.0",
   "directories": {
     "src": "./src"
   },
   "main": "server",
   "engines": {
     "node": "0.8.x",
-    "npm": "1.1.x"
-  }
+    "npm":  "1.1.x"
+  },
   "description": "",
   "licenses": [
     {
