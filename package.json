@@ -5,6 +5,10 @@
     "src": "./src"
   },
   "main": "server",
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
   "description": "",
   "licenses": [
     {
@@ -22,9 +26,9 @@
   "homepage": "https://github.com/kitsonk/dojoment/",
   "dojoBuild": "dojoment.profile.js",
   "dependencies": {
-    "marked": "~0.2.5",
-    "express": "~3.0.0rc3",
-    "jade": "~0.27.2",
-    "highlight.js": "~7.1.0"
+    "marked": "0.2.x",
+    "express": "3.0.x",
+    "jade": "0.27.x",
+    "highlight.js": "7.1.x"
   }
 }
