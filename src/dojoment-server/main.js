@@ -19,6 +19,7 @@ require([
 		app.use(app.router);
 
 		app.use("/_static", express["static"]("./_static"));
+		app.use("/src", express["static"]("./src"));
 
 		app.use("/500", function(request, response, next){
 			next(new Error("All your base are belong to us!"));
@@ -51,8 +52,12 @@ require([
 
 	// Main document handler
 	app.get("/*", function(request, response, next){
-		if(request.params[0] == "404" || /^_static/.test(request.params[0])){
+		if(request.params[0] == "404" || /^_static/.test(request.params[0]) || /^src/.test(request.params[0])){
 			next();
+		}else if(request.params[0] == "glasstest"){
+			response.render("glasstest", {
+				title: "glass test"
+			});
 		}else{
 			var docFileName = "refdocs/" + request.params[0] + (request.params[0] === "" ? "index.mdown" : /\/$/.test(request.params[0]) ? "index.mdown" : /.mdown$/i.test(request.params[0]) ? "" : ".mdown");
 			dfs.exists(docFileName).then(function(exists){

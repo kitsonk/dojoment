@@ -1,0 +1,35 @@
+extends main
+
+block scripts
+  script(type="text/javascript")
+    dojoConfig = {
+      async: 1,
+      baseUrl: "/src/",
+      packages: [{
+        name: "dojo",
+        location: "dojo"
+      },{
+        name: "dijit",
+        location: "dijit"
+      },{
+        name: "dojoment-client",
+        location: "dojoment-client"
+      }],
+      deps: ["dojoment-client/main"]
+    };
+  script(type="text/javascript", src="/src/dojo/dojo.js")
+
+block content
+  .refdoc_wrap
+    h1 Testing CodeGlass
+    p Something thing blah blah
+    .glass
+      textarea.parts { "js": "console.log('hello')", "html": "<div>Testing</div><pre>&lt; &gt; &amp;</pre>" }
+      p An example of something
+      div.
+        <pre><code class="lang-js">require([<span class="string">"dojo/dom"</span>, <span class="string">"dojo/domReady!"</span>], <span class="keyword">function</span>(dom){
+        console.log(<span class="string">"nothing"</span>);
+        });</code></pre>
+      div.
+        <pre><code class="lang-xml">&ltdiv&gtHello World!&lt;/div&gt;</code></pre>
+    p blah blah blah after blah

@@ -1,3 +1,6 @@
+@import url("/src/dijit/themes/claro/claro.css");
+@import url("/src/dijit/themes/claro/document.css");
+@import url("/src/dojoment-client/resources/CodeGlass.css");
 
 html, body {
 	margin: 0;
@@ -6,21 +9,62 @@ html, body {
 	height: 100%;
 }
 
-body {
+body.claro {
 	font-family: Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif;
 	font-size: 14px;
 	line-height:1.3em;
 }
 
-pre {
+.claro pre {
 	background-color: #F7F7F7;
 	box-shadow: 0 4px 4px -3px rgba(0, 0, 0, 0.5);
 	font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
 	font-size: 13px;
 	padding: 10px;
+	margin: 12px 0 0 0;
+}
+
+.claro pre > code {
+	border: none;
+	background: none;
+	font-size: 100%;
 }
 
 .refdoc_wrap {
 	width: 960px;
 	margin: 0 auto;
+}
+
+.glass > textarea {
+	display: none;
+}
+
+.CodeGlass {
+	border: 1px solid #d3d3d3;
+	padding: 12px 6px;
+	box-shadow: 0 4px 4px -3px rgba(0, 0, 0, 0.5);
+}
+
+.CodeGlass pre {
+	box-shadow: none;
+}
+
+.CodeGlassRun,
+.CodeGlassCode,
+.CodeGlassCollapse {
+	border: 1px solid #AAAAAA;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+	margin: 0 10px 10px 0;
+	padding: 4px;
+	text-decoration: none;
+	color: #000000;
+	background-color: #EEEEEE;
+    background-repeat: repeat-x;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(240, 240, 240)), to(rgb(216, 216, 216)));
+    background-image: -webkit-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: -moz-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: -o-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: -ms-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
 }
