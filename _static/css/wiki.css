@@ -12,27 +12,54 @@ html, body {
 body.claro {
 	font-family: Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif;
 	font-size: 14px;
-	line-height:1.3em;
+	line-height: 1.5em;
+	background-color: #F7F7F7;
+}
+
+blockquote {
+	border-top: none;
+	border-bottom: none;
+	border-left: 2px solid #d3d3d3;
+	margin: 1em 0;
+	padding: 0.25em 1em;
+	font-size: 1em;
+}
+
+p {
+	margin: 1em 0;
 }
 
 .claro pre {
 	background-color: #F7F7F7;
 	box-shadow: 0 4px 4px -3px rgba(0, 0, 0, 0.5);
 	font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+	line-height: 1.1em;
 	font-size: 13px;
 	padding: 10px;
 	margin: 12px 0 0 0;
+}
+
+.claro code {
+	background-color: #F7F7F7;
+	font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+	font-size: 95%;
+	padding: 2px;
 }
 
 .claro pre > code {
 	border: none;
 	background: none;
 	font-size: 100%;
+	padding: 0;
 }
 
 .refdoc_wrap {
 	width: 960px;
 	margin: 0 auto;
+	border-left: 1px solid #d3d3d3;
+	border-right: 1px solid #d3d3d3;
+	padding: 2em;
+	background-color: #FFFFFF;
 }
 
 .glass > textarea {
@@ -49,9 +76,9 @@ body.claro {
 	box-shadow: none;
 }
 
-.CodeGlassRun,
-.CodeGlassCode,
-.CodeGlassCollapse {
+.claro .CodeGlassRun,
+.claro .CodeGlassCode,
+.claro .CodeGlassCollapse {
 	border: 1px solid #AAAAAA;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;

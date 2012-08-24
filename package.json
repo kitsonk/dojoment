@@ -26,7 +26,6 @@
   "homepage": "https://github.com/kitsonk/dojoment/",
   "dojoBuild": "dojoment.profile.js",
   "dependencies": {
-    "marked": "0.2.x",
     "express": "3.0.x",
     "jade": "0.27.x",
     "highlight.js": "7.1.x"
