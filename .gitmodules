@@ -13,3 +13,6 @@
 [submodule "refdocs"]
 	path = refdocs
 	url = https://github.com/kitsonk/refdocs.git
+[submodule "node_modules/marked"]
+	path = node_modules/marked
+	url = https://github.com/kitsonk/marked.git
