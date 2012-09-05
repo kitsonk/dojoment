@@ -109,6 +109,7 @@ p {
 
 .CodeGlass {
 	border: 1px solid #d3d3d3;
+	margin: 1em 0;
 	padding: 12px 6px;
 	box-shadow: 0 4px 4px -3px rgba(0, 0, 0, 0.5);
 }
@@ -135,4 +136,8 @@ p {
     background-image: -o-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
     background-image: -ms-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
     background-image: linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+}
+
+.claro .dijitDialog .dijitTabPaneWrapper > .dijitContentPane {
+	padding: 0;
 }
