@@ -1,6 +1,6 @@
-@import url("/src/dijit/themes/claro/claro.css");
-@import url("/src/dijit/themes/claro/document.css");
-@import url("/src/dojoment-client/resources/CodeGlass.css");
+@import url("../../src/dijit/themes/claro/claro.css");
+@import url("../../src/dijit/themes/claro/document.css");
+@import url("../../src/dojoment-client/resources/CodeGlass.css");
 
 html, body {
 	margin: 0;
@@ -37,6 +37,7 @@ p {
 	font-size: 13px;
 	padding: 10px;
 	margin: 12px 0 0 0;
+	overflow: auto;
 }
 
 .claro code {
@@ -60,6 +61,46 @@ p {
 	border-right: 1px solid #d3d3d3;
 	padding: 2em;
 	background-color: #FFFFFF;
+}
+
+.reftoc {
+	float: right;
+	width: 20%;
+}
+
+.toc_header {
+	border: 1px solid #AAAAAA;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+	margin: 0 10px 10px 0;
+	padding: 4px;
+	color: #000000;
+	text-align: center;
+	background-color: #EEEEEE;
+    background-repeat: repeat-x;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(240, 240, 240)), to(rgb(216, 216, 216)));
+    background-image: -webkit-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: -moz-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: -o-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: -ms-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+    background-image: linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+}
+
+.toc_content > ul {
+	margin: 0;
+	padding: 0;
+}
+
+.toc_content > ul > li {
+	display: block;
+}
+
+.toc_content > ul > li ul {
+	padding-left: 2em;
+}
+
+.refdoc {
+	width: 75%;
 }
 
 .glass > textarea {

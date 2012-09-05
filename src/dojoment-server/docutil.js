@@ -3,11 +3,60 @@ define([
 	"dojo/node!marked"
 ], function(hljs, marked){
 
-	var highlight = function(code, lang){
+	var glassify = function(code){
+			code = code.replace(/^\n/, "");
+			var block = /^ *:{2} *(\w+) *:{2} *\n([^\0]+?)(\n *:{2}|$)/,
+				paragraph = /^([^\n]+\n?(?!$2 *:{2} *(\w+) *:{2} *\n([^\0]+?)(\n *:{2}|$)))+\n*/,
+				text = /^[^\n]*/,
+				output = [],
+				parts = {},
+				cap;
+			while(code){
+				if(cap = block.exec(code)){
+					var part;
+					code = code.substring(cap[0].length - cap[3].length + 1);
+					switch(cap[1]){
+						case "dojoConfig":
+							parts.dojoConfig = cap[2];
+							break;
+						case "js":
+						case "javascript":
+							part = cap[2].replace(/^ *\n/, "");
+							parts.js = part;
+							output.push('<pre><code class="lang-javascript">' +
+								hljs.highlight("javascript", part).value + "</code></pre>");
+							break;
+						case "html":
+							part = cap[2].replace(/^ *\n/, "");
+							parts.html = part;
+							output.push('<pre><code class="lang-xml">' +
+								hljs.highlight("xml", part).value + "</code></pre>");
+							break;
+						case "css":
+							part = cap[2].replace(/^ *\n/, "");
+							parts.css = part;
+							output.push('<pre><code class="lang-css">' +
+								hljs.highlight("css", part).value + "</code></pre>");
+					}
+					continue;
+				}
+				if(cap = paragraph.exec(code)){
+					code = code.substring(cap[0].length);
+					output.push("<p>" + marked.inline(cap[1]) + "</p>");
+					continue;
+				}
+				if(cap = text.exec(code)){
+					code = code.substring(cap[0].length);
+					console.log("text");
+					continue;
+				}
+			}
+			return '<div class="glass"><textarea class="parts">' + JSON.stringify(parts) + "</textarea>\n" + output.join("\n") + '</div>';
+		},
+
+		highlight = function(code, lang){
 			// Only including the languages we want to support
 			switch(lang){
-				case "glass":
-					break;
 				case "js":
 					code = hljs.highlight("javascript", code).value;
 					break;
@@ -73,7 +122,8 @@ define([
 		gfm: true,
 		pendantic: false,
 		anchors: true,
-		highlight: highlight
+		highlight: highlight,
+		codeglass: glassify
 	});
 
 	return {
@@ -89,6 +139,7 @@ define([
 
 		toc: getToc,
 		title: getTitle,
-		highlight: highlight
+		highlight: highlight,
+		glassify: glassify
 	};
 });

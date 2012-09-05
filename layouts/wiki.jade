@@ -3,9 +3,30 @@ extends main
 block header
   .header Dojo Toolkit Live Reference Guide
 
+block scripts
+  script(type="text/javascript")
+    dojoConfig = {
+      async: 1,
+      baseUrl: "/src/",
+      packages: [{
+        name: "dojo",
+        location: "dojo"
+      },{
+        name: "dijit",
+        location: "dijit"
+      },{
+        name: "dojoment-client",
+        location: "dojoment-client"
+      }],
+      deps: ["dojoment-client/main"]
+    };
+  script(type="text/javascript", src="/src/dojo/dojo.js")
+
 block content
   .refdoc_wrap
-    .reftoc !{toc}
+    .reftoc 
+      .toc_header Contents
+      .toc_content !{toc}
     .refdoc !{doc}
 
 block footer
