@@ -68,6 +68,7 @@ require([
 							title: parsedDoc.title,
 							toc: parsedDoc.toc,
 							doc: parsedDoc.doc,
+							cdn: config.repoInfo.cdn,
 							copyright: config.repoInfo.copyright
 						});
 					});
@@ -78,6 +79,7 @@ require([
 		}
 	});
 
+	// Start Listening
 	app.listen(appPort);
 
 	util.puts("HTTP server started on port: " + appPort);

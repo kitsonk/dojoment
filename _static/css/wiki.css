@@ -1,6 +1,7 @@
 @import url("../../src/dijit/themes/claro/claro.css");
 @import url("../../src/dijit/themes/claro/document.css");
 @import url("../../src/dojoment-client/resources/CodeGlass.css");
+@import url("../Font-Awesome/css/font-awesome.css");
 
 html, body {
 	margin: 0;
@@ -10,8 +11,6 @@ html, body {
 }
 
 body.claro {
-	font-family: Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif;
-	font-size: 14px;
 	line-height: 1.5em;
 	background-color: #F7F7F7;
 }
@@ -63,6 +62,11 @@ p {
 	background-color: #FFFFFF;
 }
 
+.claro .refdoc_wrap {
+	font-family: Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif;
+	font-size: 14px;
+}
+
 .reftoc {
 	float: right;
 	width: 20%;
@@ -72,7 +76,7 @@ p {
 	border: 1px solid #AAAAAA;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
-	margin: 0 10px 10px 0;
+	margin: 0 0 10px 0;
 	padding: 4px;
 	color: #000000;
 	text-align: center;
@@ -86,6 +90,10 @@ p {
     background-image: linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
 }
 
+.toc_content {
+	font-size: 0.95em;
+}
+
 .toc_content > ul {
 	margin: 0;
 	padding: 0;
@@ -96,7 +104,20 @@ p {
 }
 
 .toc_content > ul > li ul {
-	padding-left: 2em;
+	padding-left: 1.5em;
+}
+
+.toc_content > ul > li li {
+	color: #999999;
+}
+
+.toc_content a {
+	color: #666666;
+	text-decoration: none;
+}
+
+.toc_content a:hover {
+	border-bottom: 1px dotted #AAAAAA;
 }
 
 .refdoc {
@@ -125,7 +146,7 @@ p {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
 	margin: 0 10px 10px 0;
-	padding: 4px;
+	padding: 4px 8px 4px 10px;
 	text-decoration: none;
 	color: #000000;
 	background-color: #EEEEEE;
@@ -140,4 +161,25 @@ p {
 
 .claro .dijitDialog .dijitTabPaneWrapper > .dijitContentPane {
 	padding: 0;
+	overflow: hidden;
+}
+
+.claro .dijitDialogPaneContent {
+	font-size: 14px;
+}
+
+.claro .dijitDialog .dijitTabPaneWrapper > .dijitContentPane .dijitContentPane {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.claro .dijitDialog .dijitTabPaneWrapper > .dijitContentPane textarea {
+	padding: 0.5em;
+	border: none;
+	font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+	line-height: 1.1em;
+	font-size: 13px;
+	height: 99%;
+	width: 99%;
 }

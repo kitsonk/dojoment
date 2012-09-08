@@ -6,7 +6,8 @@
 		"basePath": "refdocs",
 		"rootUrl": "/",
 		"title": "Dojo Toolkit Reference Guide",
-		"copyright": "Copyright &copy; Dojo Toolkit 2004-2012"
+		"copyright": "Copyright &copy; Dojo Toolkit 2004-2012",
+		"cdn": "//ajax.googleapis.com/ajax/libs/dojo/1.8.0/"
 	},
 	"git": {
 		"pullEnabled": 0,

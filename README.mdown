@@ -24,7 +24,7 @@ Additional libraries are licensed and copyrighted by their respective owners.
 
 ## Requirements ##
 
-* [Node.js][nodejs] - Requires v0.8 or later
+* [Node.js][nodejs] - Requires v0.8 or later (including `npm`)
 * [Dojo Toolkit][dojo] - Requires v1.8.0 or later
 * [express][express] - Requires v3.0.0 or later
 * [jade][jade] - Requires v0.27.2 or later
@@ -33,10 +33,13 @@ Additional libraries are licensed and copyrighted by their respective owners.
 * [stylus][stylus] - Requires v0.29.0 or later
 * [Font-Awesome][fontawesome] - Requires v2.0 or later
 
+The Dojo Toolkit and Font-Awesome and the customized fork of marked are installed as submodules and can be managed by `git`.  express, jade, highlight.js and stylus are installed as node modules and can be managed via `npm`.
+
 ## Installation ##
 
 *Experimental* does mean experimental, this is under heavy development and I may not remember to update the `README` every time.
 
+* Ensure you have `git`, Node.js and `npm` installed.
 * Clone the repository recursively:
 
 ```bash

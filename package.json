@@ -7,7 +7,7 @@
   "main": "server",
   "engines": {
     "node": "0.8.x",
-    "npm":  "1.1.x"
+    "npm": "1.1.x"
   },
   "description": "",
   "licenses": [
@@ -28,6 +28,7 @@
   "dependencies": {
     "express": "3.0.x",
     "jade": "0.27.x",
-    "highlight.js": "7.1.x"
+    "highlight.js": "7.1.x",
+    "stylus": "0.29.0"
   }
 }

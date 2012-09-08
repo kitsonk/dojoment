@@ -1,8 +1,10 @@
 define([
+	"dojo/_base/array", // array.forEach
 	"dojo/_base/config", // config.baseUrl
 	"dojo/_base/declare", // declare
 	"dojo/_base/fx", // baseFx.anim
 	"dojo/_base/lang", // lang.hitch
+	"dojo/aspect", // aspect.after
 	"dojo/dom-class", // domClass.toggle domClass.contains
 	"dojo/dom-construct", // domConst.place
 	"dojo/dom-geometry", // domGeom.getContentBox
@@ -15,30 +17,106 @@ define([
 	"dijit/_TemplatedMixin",
 	"dijit/_WidgetBase",
 	"dijit/Dialog",
+	"dijit/Toolbar",
+	"dijit/form/Button",
+	"dijit/layout/BorderContainer",
 	"dijit/layout/ContentPane",
 	"dijit/layout/TabContainer",
 	"dojo/text!./resources/CodeGlass.html",
 	"dojo/text!./resources/CodeGlassCodeTemplate.html",
+	"dojo/i18n!dijit/nls/loading",
 	"dojo/sniff"
-], function(config, declare, baseFx, lang, domClass, domConst, domGeom, style, JSON, has, on, query, _OnDijitClickMixin,
-		_TemplatedMixin, _WidgetBase, Dialog, ContentPane, TabContainer, template, codeTemplate){
+], function(array, config, declare, baseFx, lang, aspect, domClass, domConst, domGeom, style, JSON, has, on, query,
+		_OnDijitClickMixin, _TemplatedMixin, _WidgetBase, Dialog, Toolbar, Button, BorderContainer, ContentPane,
+		TabContainer, template, codeTemplate, i18nLoading){
 
 	var scriptOpen = "<scr" + "ipt>",
 		scriptClose = "</" + "scri" + "pt>",
 		codeGlassRegEx = /\{\{\s?([^\}]+)\s?\}\}/g;
 
 	return declare([_WidgetBase, _TemplatedMixin, _OnDijitClickMixin], {
+
+		// parts: Object
+		//		Contains the un-encoded parts of the code.
 		parts: null,
+
+		// dialog: dijit/Dialog
+		//		The dialog that displays the example.
 		dialog: null,
+
+		// iframe: IFrame
+		//		The DOM Node where the example executes.
 		iframe: null,
+
+		// tc: dijit/layout/TabContainer
+		//		The tab container that sits within the dialog.
 		tc: null,
+
+		// tabExample: dijit/layout/ContentPane
+		//		Contains the content where the example is displayed.
 		tabExample: null,
+
+		// tabCode: dijit/layout/ContentPane
 		tabCode: null,
+
+		// paneCode: dijit/layout/ContentPane
+		paneCode: null,
+
+		// toolbarCode: dijit/Toolbar
+		toolbarCode: null,
+
+		// renderedCode: String
 		renderedCode: "",
+
+		// displayedCode: String
+		displayedCode: "",
+
+		// baseUrl: String
 		baseUrl: config.baseUrl,
+
+		// baseClass: String
+		baseClass: "CodeGlass",
+
+		// cdn: String
+		cdn: config.cdn,
+
+		// theme: String
 		theme: "claro",
+
+		// showSource: Boolean
 		showSource: true,
+
+		// width: Integer
+		width: 700,
+
+		// height: Integer
+		height: 480,
+
+		// title: String
+		title: "Code Glass",
+
+		// _exampleFired: Boolean
+		_exampleFired: false,
+
+		// templateString: String
 		templateString: template,
+
+		// labels: Object
+		labels: {
+			run: "<i class='icon-play'></i> Run",
+			runTitle: "Run Code Example",
+			code: "<i class='icon-file'></i> Code",
+			codeTitle: "Display Source Code",
+			collapse: "<i class='icon-chevron-up'></i> Collapse",
+			collapseTitle: "Collapse Code Example",
+			expand: "<i class='icon-chevron-down'></i> Expand",
+			expandTitle: "Expand Code Example",
+			example: "<i class='icon-play'></i> Example",
+			copy: "<i class='icon-copy'></i> Select All",
+			copyTitle: "Select all the Code",
+			"export": "<i class='icon-share'></i> Export",
+			exportTitle: "Export to JSFiddle"
+		},
 
 		buildRendering: function(){
 			var nlTextArea = query("textarea.parts", this.srcNodeRef),
@@ -50,112 +128,181 @@ define([
 			this.inherited(arguments);
 		},
 
-		_run: function(e){
+		_dialogHide: function(){
+			this._exampleFired = false;
+		},
+
+		_exampleShow: function(){
+			if(!this._exampleFired){
+				this._exampleFired = true;
+
+				if(this.iframe) domConst.destroy(this.iframe);
+				this.tabExample.set("content", '<div class="CodeGlassLoading">' + i18nLoading.loadingState + '</div>');
+
+				setTimeout(lang.hitch(this, function(){
+
+					var tabExampleContentBox = domGeom.getContentBox(this.tabExample.domNode),
+						iframe = this.iframe = domConst.create("iframe", {
+							src: "javascript: '" +
+								this.renderedCode.replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\n/g, "\\n") + "'",
+							style: {
+								height: (tabExampleContentBox.h - 6) + "px",
+								width: tabExampleContentBox.w + "px",
+								border: "none",
+								visibility: "hidden"
+							}
+						});
+
+					this.tabExample.set("content", iframe);
+
+					on(iframe, "load", function(){
+						style.set(iframe, {
+							"visibility": "visible",
+							opacity: 0
+						});
+						baseFx.anim(iframe, { opacity: 1});
+					});
+
+				}), this.dialog.duration + 450);
+			}
+		},
+
+		_selectCode: function(e){
 			e && e.preventDefault();
+			if(this.textareaCode){
+				this.textareaCode.focus();
+				this.textareaCode.select();
+			}
+		},
 
-			if(this.iframe) domConst.destroy(this.iframe);
-			if(!this.renderedCode) this._renderCode();
+		_codeShow: function(){
+			if(!this.displayedCode) this._renderCode();
+			if(!this.textareaCode){
+				var textarea = this.textareaCode = domConst.create("textarea", {
+					innerHTML: this.displayedCode
+				});
+				this.paneCode.set("content", textarea);
+				on(textarea, "dblclick", lang.hitch(this, this._selectCode));
+			}
+		},
 
-			if(!this.dialog){
+		_buildDialog: function(){
+			var widgets = [],
+				bcCode = new BorderContainer({
+					gutters: false
+				}),
+				toolbarCode = new Toolbar({
+					region: "top"
+				}),
+				buttonCopy = new Button({
+					label: this.labels.copy,
+					title: this.labels.copyTitle
+				}),
+				buttonExport = new Button({
+					label: this.labels["export"],
+					title: this.labels.exportTitle
+				});
+
+			widgets.push(bcCode, toolbarCode, buttonCopy, buttonExport,
 				this.dialog = new Dialog({
-					title: "CodeGlass"
-				}, this.dialogNode);
+					title: this.title
+				}, this.dialogNode),
 				this.tc = new TabContainer({
 					tabPosition: "bottom",
 					style: {
-						width: "700px",
-						height: "480px"
+						width: this.width + "px",
+						height: this.height + "px"
 					}
-				});
+				}),
 				this.tabExample = new ContentPane({
-					title: "Example",
-					content: "Preparing Example..."
-				});
+					title: this.labels.example,
+					content: '<div class="CodeGlassLoading">' + i18nLoading.loadingState + '</div>'
+				}),
 				this.tabCode = new ContentPane({
-					title: "Code"
-				});
-				this.tc.addChild(this.tabExample);
-				this.tc.addChild(this.tabCode);
-				this.dialog.addChild(this.tc);
-				this.tabExample.startup();
-				this.tabCode.startup();
-				this.tc.startup();
-				this.dialog.startup();
-			}
+					title: this.labels.code
+				}),
+				this.paneCode = new ContentPane({
+					region: "center",
+					content: '<div class="CodeGlassLoading">' + i18nLoading.loadingState + '</div>'
+				})
+			);
 
-			this.tabCode.set("content", "Preparing Example...");
+			buttonCopy.on("click", lang.hitch(this, this._selectCode));
+
+			toolbarCode.addChild(buttonCopy);
+			toolbarCode.addChild(buttonExport);
+			bcCode.addChild(toolbarCode);
+			bcCode.addChild(this.paneCode);
+			this.tabCode.addChild(bcCode);
+			this.tabExample.on("show", lang.hitch(this, this._exampleShow));
+			this.tabCode.on("show", lang.hitch(this, this._codeShow));
+			this.tc.addChild(this.tabExample);
+			this.tc.addChild(this.tabCode);
+			this.dialog.addChild(this.tc);
+			this.dialog.on("hide", lang.hitch(this, this._dialogHide));
+
+			array.forEach(widgets, function(widget){
+				widget.startup();
+			});
+		},
+
+		_run: function(e){
+			e && e.preventDefault();
+
+			if(!this.renderedCode) this._renderCode();
+
+			if(!this.dialog) this._buildDialog();
+
+			this.tc.selectChild(this.tabExample);
 			this.dialog.show();
-
-			setTimeout(lang.hitch(this, function(){
-
-				var tabExampleContentBox = domGeom.getContentBox(this.tabExample.domNode),
-					iframe = this.iframe = domConst.create("iframe", {
-						src: "javascript: '" +
-							this.renderedCode.replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\n/g, "\\n") + "'",
-						style: {
-							height: (tabExampleContentBox.h - 6) + "px",
-							width: (tabExampleContentBox.w - 1) + "px",
-							border: "none",
-							visibility: "hidden"
-						}
-					});
-
-				this.tabExample.set("content", iframe);
-
-				function display(){
-					style.set(iframe, {
-						"visibility": "visible",
-						opacity: 0
-					});
-					baseFx.anim(iframe, { opacity: 1 });
-				}
-
-				on(iframe, "load", display);
-
-			}), this.dialog.duration + 450);
 
 		},
 
 		_showCode: function(e){
 			e && e.preventDefault();
+
+			if(!this.dialog) this._buildDialog();
+
+			this.tc.selectChild(this.tabCode);
+			this.dialog.show();
 		},
 
 		_toggle: function(e){
 			e && e.preventDefault();
 			domClass.toggle(this.domNode, "closed");
+			domConst.place(domClass.contains(this.domNode, "closed") ? this.labels.expand : this.labels.collapse,
+				this.collapseLabel,
+				"only");
 		},
 
 		_renderCode: function(){
-			var p = document.createElement('a');
-			p.href = this.domNode.ownerDocument.URL;
-			console.log(p.host);
 			var codeParts = {
-				css:'\t<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' + this.theme + '/' +
-					this.theme + '.css">\n\t<link rel="stylesheeet" href="' + this.baseUrl + 'dijit/themes/' +
-					this.theme + '/document.css">\n\t',
-				bodyargs: 'class="' + this.theme + '"',
-				html: ""
-			};
+					css: '\t<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' + this.theme + '/' +
+						this.theme + '.css">\n\t<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' +
+						this.theme + '/document.css">\n\t<link rel="stylesheet" href="' + this.baseUrl +
+						'dojoment-client/resources/CodeGlassCode.css">\n\t',
+					js: "<scr" + "ipt src='" + (has("ie") ? this.cdn : this.baseUrl) +	// has("ie") works around IE
+						"dojo/dojo.js'>" + scriptClose + "\n\t",							// issue with local resources
+					bodyargs: 'class="' + this.theme + '"',
+					html: "",
+					dojoConfig: ""
+				},
 
-			if(has("ie")){
-				codeParts.js = "<scr" + "ipt src='" + p.protocol + "//" + p.host +
-					this.baseUrl + "dojo/dojo.js'" + ">" + scriptClose;
-			}else{
-				codeParts.js = "<scr" + "ipt src='" +
-					this.baseUrl + "dojo/dojo.js'" + ">" + scriptClose;
-			}
-
-			var locals = {
-				dataUrl: this.baseUrl,
-				baseUrl: this.baseUrl,
-				theme: this.theme
-			};
+				locals = {
+					dataUrl: this.baseUrl,
+					baseUrl: this.baseUrl,
+					theme: this.theme
+				};
 
 			for(var key in this.parts){
 				var part = lang.replace(this.parts[key], locals, codeGlassRegEx);
 				switch(key){
+					case "dojoConfig":
+						// codeParts.dojoConfig = scriptOpen + part + scriptClose;
+						break;
 					case "js":
-						codeParts.js += scriptOpen + part + scriptClose;
+						codeParts.js += scriptOpen + "\n" +
+							part.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&") + scriptClose;
 						break;
 					case "html":
 						codeParts.html += part.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
@@ -166,6 +313,10 @@ define([
 			}
 
 			this.renderedCode = lang.replace(codeTemplate, codeParts);
+			this.displayedCode = this.renderedCode.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\t/g, "    ");
+			if(has("ie")){
+				this.displayedCode = this.displayedCode.replace(/\n/g, "<br/>");
+			}
 		}
 	});
 });

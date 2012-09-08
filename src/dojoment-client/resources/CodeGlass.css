@@ -2,6 +2,10 @@
 	display:none;
 }
 
+.CodeGlassLoading {
+  margin: 1em;
+}
+
 .claro .CodeGlassRun,
 .claro .CodeGlassCode,
 .claro .CodeGlassCollapse {

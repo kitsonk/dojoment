@@ -1,13 +1,13 @@
-<div class="CodeGlass">
-	<a href="#" title="Run Example" class="CodeGlassRun" data-dojo-attach-point="runLink" data-dojo-attach-event="ondijitclick: _run" role="button">
-		<span class="a11y">Run</span>
+<div class="${baseClass}">
+	<a href="#" title="${labels.runTitle}" class="${baseClass}Run" data-dojo-attach-event="ondijitclick: _run" role="button">
+		<span class="a11y">${!labels.run}</span>
 	</a>
-	<a href="#" title="Show Code" class="CodeGlassCode" data-dojo-attach-point="codeLink" data-dojo-attach-event="ondijitclick: _showCode" role="button">
-		<span class="a11y">Code</span>
+	<a href="#" title="${labels.codeTitle}" class="${baseClass}Code" data-dojo-attach-event="ondijitclick: _showCode" role="button">
+		<span class="a11y">${!labels.code}</span>
 	</a>
-	<a href="#" title="Collapse" class="CodeGlassCollapse" data-dojo-attach-point="collapseLink" data-dojo-attach-event="ondijitclick: _toggle" role="button">
-		<span class="a11y">Collapse</span>
+	<a href="#" title="${labels.collapseTitle}" class="${baseClass}Collapse" data-dojo-attach-event="ondijitclick: _toggle" role="button">
+		<span class="a11y" data-dojo-attach-point="collapseLabel">${!labels.collapse}</span>
 	</a>
 	<div data-dojo-attach-point="dialogNode"></div>
-	<div class="CodeGlassWrap" data-dojo-attach-point="containerNode"></div>
+	<div class="${baseClass}Wrap" data-dojo-attach-point="containerNode"></div>
 </div>
