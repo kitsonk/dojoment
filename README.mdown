@@ -28,8 +28,10 @@ Additional libraries are licensed and copyrighted by their respective owners.
 * [Dojo Toolkit][dojo] - Requires v1.8.0 or later
 * [express][express] - Requires v3.0.0 or later
 * [jade][jade] - Requires v0.27.2 or later
-* [marked][marked] - Requires v0.2.5 or later
+* [marked][marked] - Requires v0.2.5 or later (customized)
 * [highlight.js][hljs] - Requires v7.1.0 or later
+* [stylus][stylus] - Requires v0.29.0 or later
+* [Font-Awesome][fontawesome] - Requires v2.0 or later
 
 ## Installation ##
 
@@ -64,10 +66,12 @@ node server.js
 
 You will get a message indicating that the server is running and what port it is running on.
 
-[bsd]: http://bugs.dojotoolkit.org/browser/dojo/trunk/LICENSE#L13
+[bsd]: /kitsonk/dojoment/blob/master/LICENSE
 [nodejs]: http://nodejs.org/download/
 [dojo]: http://dojotoolkit.org/download/
 [express]: http://expressjs.com/
 [jade]: http://jade-lang.com/
 [marked]: https://github.com/chjj/marked/
 [hljs]: http://softwaremaniacs.org/soft/highlight/en/
+[stylus]: http://learnboost.github.com/stylus/
+[fontawesome]: http://fortawesome.github.com/Font-Awesome/
