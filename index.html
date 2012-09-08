@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>dojoment by kitsonk</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">dojoment</h1>
+        <p class="header">Next Generation Dojo Documentation Project</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/kitsonk/dojoment/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/kitsonk/dojoment/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/kitsonk/dojoment">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/kitsonk">kitsonk</a></p>
+
+
+      </header>
+      <section>
+        <h1>dojoment</h1>
+
+<p><em>dojoment</em> is an experimental project looking at the possibility of a markdown based community editable documentation wiki which can be used instead of the current solution which is based on reStructuredText.</p>
+
+<p>The main objectives of this project are:</p>
+
+<ul>
+<li>Base the entire solution on JavaScript (because that is what we are about)</li>
+<li>Leverage as much of the Dojo Toolkit as possible (eat our own dogfood)</li>
+<li>Adopt markdown as the primary markup</li>
+<li>Extend the markdown syntax, if required, to provide live examples</li>
+<li>Provide a community editable wiki</li>
+<li>Make it easier to generate final documentation for the website</li>
+<li>Fully integrate into git and GitHub for documentation storage</li>
+<li>Assess the suitability to be able to create Dojo Tutorials</li>
+<li>Align better with the Dojo Inline Documentation Parser</li>
+</ul><h2>Licensing</h2>
+
+<p>This is released under the same "New" BSD License as the Dojo Toolkit:</p>
+
+<ul>
+<li><a href="/kitsonk/dojoment/blob/master/LICENSE">The "New" BSD License</a></li>
+</ul><p>(Note: It is not licensed under the AFL 2.1)</p>
+
+<p>Additional libraries are licensed and copyrighted by their respective owners.</p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>
+<a href="http://nodejs.org/download/">Node.js</a> - Requires v0.8 or later (including <code>npm</code>)</li>
+<li>
+<a href="http://dojotoolkit.org/download/">Dojo Toolkit</a> - Requires v1.8.0 or later</li>
+<li>
+<a href="http://expressjs.com/">express</a> - Requires v3.0.0 or later</li>
+<li>
+<a href="http://jade-lang.com/">jade</a> - Requires v0.27.2 or later</li>
+<li>
+<a href="https://github.com/chjj/marked/">marked</a> - Requires v0.2.5 or later (customized)</li>
+<li>
+<a href="http://softwaremaniacs.org/soft/highlight/en/">highlight.js</a> - Requires v7.1.0 or later</li>
+<li>
+<a href="http://learnboost.github.com/stylus/">stylus</a> - Requires v0.29.0 or later</li>
+<li>
+<a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome</a> - Requires v2.0 or later</li>
+</ul><p>The Dojo Toolkit and Font-Awesome and the customized fork of marked are installed as submodules and can be managed by <code>git</code>.  express, jade, highlight.js and stylus are installed as node modules and can be managed via <code>npm</code>.</p>
+
+<h2>Installation</h2>
+
+<p><em>Experimental</em> does mean experimental, this is under heavy development and I may not remember to update the <code>README</code> every time.</p>
+
+<ul>
+<li>Ensure you have <code>git</code>, Node.js and <code>npm</code> installed.</li>
+<li>Clone the repository recursively:</li>
+</ul><div class="highlight"><pre>git clone --recursive https://github.com/kitsonk/dojoment.git
+</pre></div>
+
+<ul>
+<li>Update the <code>config.json</code>.</li>
+<li>Update the reference docs repository:</li>
+</ul><div class="highlight"><pre><span class="nb">cd </span>dojoment/refdocs
+git pull
+</pre></div>
+
+<ul>
+<li>Build the client library build:</li>
+</ul><div class="highlight"><pre><span class="nb">cd</span> ..
+src/util/buildScripts/build.sh --profile dojoment.profile.js
+</pre></div>
+
+<ul>
+<li>Start the server:</li>
+</ul><div class="highlight"><pre>node server.js
+</pre></div>
+
+<p>You will get a message indicating that the server is running and what port it is running on.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
