@@ -54,10 +54,6 @@ require([
 	app.get("/*", function(request, response, next){
 		if(request.params[0] == "404" || /^_static/.test(request.params[0]) || /^src/.test(request.params[0])){
 			next();
-		}else if(request.params[0] == "glasstest"){
-			response.render("glasstest", {
-				title: "glass test"
-			});
 		}else{
 			var docFileName = "refdocs/" + request.params[0] + (request.params[0] === "" ? "index.mdown" : /\/$/.test(request.params[0]) ? "index.mdown" : /.mdown$/i.test(request.params[0]) ? "" : ".mdown");
 			dfs.exists(docFileName).then(function(exists){

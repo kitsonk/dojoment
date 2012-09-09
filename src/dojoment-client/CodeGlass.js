@@ -24,11 +24,12 @@ define([
 	"dijit/layout/TabContainer",
 	"dojo/text!./resources/CodeGlass.html",
 	"dojo/text!./resources/CodeGlassCodeTemplate.html",
+	"dojo/text!./resources/CodeGlassExportTemplate.html",
 	"dojo/i18n!dijit/nls/loading",
 	"dojo/sniff"
 ], function(array, config, declare, baseFx, lang, aspect, domClass, domConst, domGeom, style, JSON, has, on, query,
 		_OnDijitClickMixin, _TemplatedMixin, _WidgetBase, Dialog, Toolbar, Button, BorderContainer, ContentPane,
-		TabContainer, template, codeTemplate, i18nLoading){
+		TabContainer, template, codeTemplate, exportTemplate, i18nLoading){
 
 	var scriptOpen = "<scr" + "ipt>",
 		scriptClose = "</" + "scri" + "pt>",
@@ -94,6 +95,14 @@ define([
 
 		// title: String
 		title: "Code Glass",
+
+		// exportUrl: String
+		//		This is the URL that should be used for posting code to.
+		exportUrl: "http://jsfiddle.net/api/post/dojo/",
+
+		// exportDojoVersion: String
+		//		This is the version of Dojo that should be used when exporting.
+		exportDojoVersion: "1.8",
 
 		// _exampleFired: Boolean
 		_exampleFired: false,
@@ -167,6 +176,28 @@ define([
 			}
 		},
 
+		_exportCode: function(e){
+			e && e.preventDefault();
+			var exportParts = {
+				action: this.exportUrl + this.exportDojoVersion + "/",
+				title: "just testing",
+				description: "",
+				resources: lang.replace("{cdn}dijit/themes/{theme}/{theme}.css,{cdn}dijit/themes/{theme}/document.css",{
+					theme: this.theme,
+					cdn: this.cdn
+				}),
+				theme: this.theme,
+				dojoConfig: "",
+				js: this.parts.js.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&") || "",
+				html: this.parts.html || "",
+				css: this.parts.css || ""
+			};
+			var exportCode = lang.replace(exportTemplate, exportParts);
+			var exportNode = domConst.toDom(exportCode);
+			exportNode.submit();
+			domConst.destroy(exportNode);
+		},
+
 		_selectCode: function(e){
 			e && e.preventDefault();
 			if(this.textareaCode){
@@ -228,6 +259,7 @@ define([
 			);
 
 			buttonCopy.on("click", lang.hitch(this, this._selectCode));
+			buttonExport.on("click", lang.hitch(this, this._exportCode));
 
 			toolbarCode.addChild(buttonCopy);
 			toolbarCode.addChild(buttonExport);
