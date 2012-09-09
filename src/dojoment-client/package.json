@@ -1,0 +1,29 @@
+{
+    "name": "dojoment-client",
+    "description": "The client libraries for dojoment, a documentation wiki for Dojo Toolkit",
+    "version": "1.0",
+    "keywords": ["JavaScript", "Dojo", "Wiki", "DMS"],
+    "maintainers": [{
+        "name": "Kitson Kelly"
+    }],
+    "contributors": [{
+        "name": "Kitson Kelly"
+    }],
+    "licenses": [{
+        "type": "BSD",
+        "url": "https://github.com/kitsonk/dojoment/blob/master/LICENSE"
+    }],
+    "bugs": "https://github.com/kitsonk/dojoment/issues",
+    "repositories": [{
+        "type": "git",
+        "url": "https://github.com/kitsonk/dojoment.git",
+        "path": "src/dojoment-client"
+    }],
+    "dependencies": {
+        "dojo": "~1.8.0",
+        "dijit": "~1.8.0"
+    },
+    "main": "main",
+    "homepage": "http://kitsonk.github.com/dojoment/",
+    "dojoBuild": "dojoment-client.profile.js"
+}
