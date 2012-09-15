@@ -8,6 +8,9 @@
 	<a href="#" title="${labels.collapseTitle}" class="${baseClass}Collapse" data-dojo-attach-event="ondijitclick: _toggle" role="button">
 		<span class="a11y" data-dojo-attach-point="collapseLabel">${!labels.collapse}</span>
 	</a>
+	<a href="#" title="${labels.exportTitle}" class="${baseClass}Export" data-dojo-attach-event="ondijitclick: _exportCode" role="button">
+		<span class="a11y">${!labels.export}</span>
+	</a>
 	<div data-dojo-attach-point="dialogNode"></div>
 	<div class="${baseClass}Wrap" data-dojo-attach-point="containerNode"></div>
 </div>

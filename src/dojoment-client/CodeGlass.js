@@ -218,8 +218,7 @@ define([
 		},
 
 		_buildDialog: function(){
-			var widgets = [],
-				bcCode = new BorderContainer({
+			var bcCode = new BorderContainer({
 					gutters: false
 				}),
 				toolbarCode = new Toolbar({
@@ -228,41 +227,33 @@ define([
 				buttonCopy = new Button({
 					label: this.labels.copy,
 					title: this.labels.copyTitle
-				}),
-				buttonExport = new Button({
-					label: this.labels["export"],
-					title: this.labels.exportTitle
 				});
 
-			widgets.push(bcCode, toolbarCode, buttonCopy, buttonExport,
-				this.dialog = new Dialog({
-					title: this.title
-				}, this.dialogNode),
-				this.tc = new TabContainer({
-					tabPosition: "bottom",
-					style: {
-						width: this.width + "px",
-						height: this.height + "px"
-					}
-				}),
-				this.tabExample = new ContentPane({
-					title: this.labels.example,
-					content: '<div class="CodeGlassLoading">' + i18nLoading.loadingState + '</div>'
-				}),
-				this.tabCode = new ContentPane({
-					title: this.labels.code
-				}),
-				this.paneCode = new ContentPane({
-					region: "center",
-					content: '<div class="CodeGlassLoading">' + i18nLoading.loadingState + '</div>'
-				})
-			);
+			this.dialog = new Dialog({
+				title: this.title
+			}, this.dialogNode);
+			this.tc = new TabContainer({
+				tabPosition: "bottom",
+				style: {
+					width: this.width + "px",
+					height: this.height + "px"
+				}
+			});
+			this.tabExample = new ContentPane({
+				title: this.labels.example,
+				content: '<div class="CodeGlassLoading">' + i18nLoading.loadingState + '</div>'
+			});
+			this.tabCode = new ContentPane({
+				title: this.labels.code
+			});
+			this.paneCode = new ContentPane({
+				region: "center",
+				content: '<div class="CodeGlassLoading">' + i18nLoading.loadingState + '</div>'
+			});
 
 			buttonCopy.on("click", lang.hitch(this, this._selectCode));
-			buttonExport.on("click", lang.hitch(this, this._exportCode));
 
 			toolbarCode.addChild(buttonCopy);
-			toolbarCode.addChild(buttonExport);
 			bcCode.addChild(toolbarCode);
 			bcCode.addChild(this.paneCode);
 			this.tabCode.addChild(bcCode);
@@ -273,9 +264,8 @@ define([
 			this.dialog.addChild(this.tc);
 			this.dialog.on("hide", lang.hitch(this, this._dialogHide));
 
-			array.forEach(widgets, function(widget){
-				widget.startup();
-			});
+			// The dialog should cascade the startup creation
+			this.dialog.startup();
 		},
 
 		_run: function(e){

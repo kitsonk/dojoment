@@ -141,7 +141,8 @@ p {
 
 .claro .CodeGlassRun,
 .claro .CodeGlassCode,
-.claro .CodeGlassCollapse {
+.claro .CodeGlassCollapse,
+.claro .CodeGlassExport {
 	border: 1px solid #AAAAAA;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
@@ -157,6 +158,14 @@ p {
     background-image: -o-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
     background-image: -ms-linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
     background-image: linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
+}
+
+.claro .CodeGlassExport {
+	display: block;
+	float: right;
+	margin-right: 0;
+	margin-top: -6px;
+	margin-left: auto;
 }
 
 .claro .dijitDialog .dijitTabPaneWrapper > .dijitContentPane {
