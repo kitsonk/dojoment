@@ -4,36 +4,91 @@ define([
 ], function(hljs, marked){
 
 	var glassify = function(code){
-			code = code.replace(/^\n/, "");
-			var block = /^ *:{2} *(\w+) *:{2} *\n([^\0]+?)(\n *:{2}|$)/,
-				paragraph = /^([^\n]+\n?(?!$2 *:{2} *(\w+) *:{2} *\n([^\0]+?)(\n *:{2}|$)))+\n*/,
-				text = /^[^\n]*/,
+
+			function stripIndent(str){
+				str = str.replace(/(^\n+|\n+$)/, "");
+				var pad = str.match(/^ */)[0].length;
+				return str.replace(new RegExp("^ {" + pad + "}", "gm"), "");
+			}
+
+				// Match any empty newlines
+				// RegEx:
+				//		^ - Start of Line
+				//		\n+ - One or more newlines
+			var space = /^\n+/,
+
+				// Match code blocks, for example:
+				//
+				//		::js::
+				//			console.log();
+				//
+				// RegEx:
+				//		^ - Start of line
+				//		:{2} - Two ::
+				//		 * - Any spaces
+				//		(\w+) - Capture
+				//			\w+ - At least one non-whitespace
+				//		 * - Any spaces
+				//		\n+ - At least one newline
+				//		((?: {2,}[^\n]+(?:\n|$)+)*) - Capture
+				//			(?: {2,}[^\n]+(?:\n|$)+)* - Repeatable non capturing group
+				//				 {2,} - Two or more spaces
+				//				[^\n]+ - At least one character not a newline
+				//				(?:\n|$)+ - Non-capturing group of at least one
+				//					\n|$ - New-line or end of line
+				codeblock = /^:{2} *(\w+) *:{2} *\n+((?: {2,}[^\n]+(?:\n|$)+)*)/,
+
+				// Match multi-line indented paragraphs.
+				//
+				// RegEx:
+				//		^ - Start of line
+				//		 {2,} - Two or more spaces
+				//		[^\n]+ - One or more charecters not a new line
+				//		\n - New Line
+				//		(?: {2,}[^\n]+(?:\n|$))* - Repeatable non-capturing group
+				//			 {2,} - Two or more spaces
+				//			[^\n]+ - One or more charecters not a new line
+				//			(?:\n|$) - Non capturing group
+				//				\n|$ - New-line or end of line
+				paragraph = /^ {2,}[^\n]+\n(?: {2,}[^\n]+(?:\n|$))*/,
+
+				// Catch all for any lines of text.
+				//
+				//	RegEx:
+				//		^ - Start of line
+				//		[^\n]+ - One or more charecters not a new-line
+				text = /^[^\n]+/,
 				output = [],
 				parts = {},
 				cap;
+
 			while(code){
-				if(cap = block.exec(code)){
+				if(cap = space.exec(code)){
+					code = code.substring(cap[0].length);
+					continue;
+				}
+				if(cap = codeblock.exec(code)){
 					var part;
-					code = code.substring(cap[0].length - cap[3].length + 1);
+					code = code.substring(cap[0].length);
 					switch(cap[1]){
 						case "dojoConfig":
-							parts.dojoConfig = cap[2];
+							parts.dojoConfig = stripIndent(cap[2]);
 							break;
 						case "js":
 						case "javascript":
-							part = cap[2].replace(/^ *\n/, "");
+							part = stripIndent(cap[2]);
 							parts.js = part;
 							output.push('<pre><code class="lang-javascript">' +
 								hljs.highlight("javascript", part).value + "</code></pre>");
 							break;
 						case "html":
-							part = cap[2].replace(/^ *\n/, "");
+							part = stripIndent(cap[2]);
 							parts.html = part;
 							output.push('<pre><code class="lang-xml">' +
 								hljs.highlight("xml", part).value + "</code></pre>");
 							break;
 						case "css":
-							part = cap[2].replace(/^ *\n/, "");
+							part = stripIndent(cap[2]);
 							parts.css = part;
 							output.push('<pre><code class="lang-css">' +
 								hljs.highlight("css", part).value + "</code></pre>");
@@ -42,12 +97,12 @@ define([
 				}
 				if(cap = paragraph.exec(code)){
 					code = code.substring(cap[0].length);
-					output.push("<p>" + marked.inline(cap[1]) + "</p>");
+					output.push("<p>" + marked.inline(stripIndent(cap[0])) + "</p>\n");
 					continue;
 				}
 				if(cap = text.exec(code)){
 					code = code.substring(cap[0].length);
-					console.log("text");
+					output.push(marked.inline(stripIndent(cap[0])));
 					continue;
 				}
 			}
