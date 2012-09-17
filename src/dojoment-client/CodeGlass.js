@@ -285,6 +285,12 @@ define([
 		},
 
 		_renderCode: function(){
+
+			function decodeString(str, lpad){
+				str = str.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+				return lpad ? str.replace(/^/gm, new Array(lpad + 1).join("\t")) : str;
+			}
+
 			var codeParts = {
 					css: '\t<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' + this.theme + '/' +
 						this.theme + '.css">\n\t<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' +
@@ -311,18 +317,18 @@ define([
 						break;
 					case "js":
 						codeParts.js += scriptOpen + "\n" +
-							part.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&") + scriptClose;
+							decodeString(part, 2) + "\n\t" + scriptClose;
 						break;
 					case "html":
-						codeParts.html += part.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+						codeParts.html += decodeString(part, 1);
 						break;
 					case "css":
-						codeParts.css += '<style type="text/css">\n' + part + "\n</style>";
+						codeParts.css += '<style type="text/css">\n' + decodeString(part, 2) + "\n\t</style>";
 				}
 			}
 
 			this.renderedCode = lang.replace(codeTemplate, codeParts);
-			this.displayedCode = this.renderedCode.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\t/g, "    ");
+			this.displayedCode = decodeString(this.renderedCode).replace(/^\t/gm, "    ");
 			if(has("ie")){
 				this.displayedCode = this.displayedCode.replace(/\n/g, "<br/>");
 			}
