@@ -313,7 +313,9 @@ define([
 				var part = lang.replace(this.parts[key], locals, codeGlassRegEx);
 				switch(key){
 					case "dojoConfig":
-						// codeParts.dojoConfig = scriptOpen + part + scriptClose;
+						codeParts.dojoConfig = scriptOpen +
+							decodeString("\ndojoConfig = {\n\t" + part.split(/,?\n/g).join(",\n\t") + "\n};", 2) +
+							"\n\t" + scriptClose;
 						break;
 					case "js":
 						codeParts.js += scriptOpen + "\n" +
