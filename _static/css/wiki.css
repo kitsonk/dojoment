@@ -160,6 +160,14 @@ p {
     background-image: linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216));
 }
 
+.claro .CodeGlassRun:hover,
+.claro .CodeGlassCode:hover,
+.claro .CodeGlassCollapse:hover,
+.claro .CodeGlassExport:hover {
+	color: #0033DD;
+	border-color: #CCCCCC;
+}
+
 .claro .CodeGlassExport {
 	display: block;
 	float: right;

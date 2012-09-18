@@ -36,6 +36,11 @@ define([
 		scriptClose = "</" + "scri" + "pt>",
 		codeGlassRegEx = /\{\{\s?([^\}]+)\s?\}\}/g;
 
+	function decodeString(str, lpad){
+		str = str.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+		return lpad ? str.replace(/^/gm, new Array(lpad + 1).join("\t")) : str;
+	}
+
 	return declare([_WidgetBase, _TemplatedMixin, _OnDijitClickMixin], {
 
 		// parts: Object
@@ -175,7 +180,7 @@ define([
 				}),
 				theme: this.theme,
 				dojoConfig: "",
-				js: this.parts.js.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&") || "",
+				js: decodeString(this.parts.js) || "",
 				html: this.parts.html || "",
 				css: this.parts.css || ""
 			};
@@ -194,7 +199,7 @@ define([
 		},
 
 		_codeShow: function(){
-			if(!this.displayedCode) this._renderCode();
+			if(!this.displayedCode) this._renderCodeDisplay();
 			if(!this.textareaCode){
 				var textarea = this.textareaCode = domConst.create("textarea", {
 					innerHTML: this.displayedCode
@@ -258,7 +263,7 @@ define([
 		_run: function(e){
 			e && e.preventDefault();
 
-			if(!this.renderedCode) this._renderCode();
+			if(!this.renderedCode) this._renderCodeExample();
 
 			if(!this.dialog) this._buildDialog();
 
@@ -284,20 +289,14 @@ define([
 				"only");
 		},
 
-		_renderCode: function(){
-
-			function decodeString(str, lpad){
-				str = str.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
-				return lpad ? str.replace(/^/gm, new Array(lpad + 1).join("\t")) : str;
-			}
-
+		_renderCodeExample: function(){
 			var codeParts = {
-					css: '\t<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' + this.theme + '/' +
-						this.theme + '.css">\n\t<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' +
-						this.theme + '/document.css">\n\t<link rel="stylesheet" href="' + this.baseUrl +
-						'dojoment-client/resources/CodeGlassCode.css">\n\t',
+					css: '<link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' + this.theme + '/' +
+						this.theme + '.css"><link rel="stylesheet" href="' + this.baseUrl + 'dijit/themes/' +
+						this.theme + '/document.css"><link rel="stylesheet" href="' + this.baseUrl +
+						'dojoment-client/resources/CodeGlassCode.css">',
 					js: "<scr" + "ipt src='" + (has("ie") ? this.cdn : this.baseUrl) +	// has("ie") works around IE
-						"dojo/dojo.js'>" + scriptClose + "\n\t",							// issue with local resources
+						"dojo/dojo.js'>" + scriptClose,									// issue with local resources
 					bodyargs: 'class="' + this.theme + '"',
 					html: "",
 					dojoConfig: ""
@@ -307,6 +306,43 @@ define([
 					dataUrl: this.baseUrl,
 					baseUrl: this.baseUrl,
 					theme: this.theme
+				};
+
+			for(var key in this.parts){
+				var part = lang.replace(this.parts[key], locals, codeGlassRegEx);
+				switch(key){
+					case "dojoConfig":
+						codeParts.dojoConfig = scriptOpen +
+							decodeString("dojoConfig = {" + part.split(/,?\n/g).join(",\n") + "\n};") + scriptClose;
+						break;
+					case "js":
+						codeParts.js += scriptOpen + decodeString(part) + scriptClose;
+						break;
+					case "html":
+						codeParts.html += decodeString(part);
+						break;
+					case "css":
+						codeParts.css += '<style type="text/css">' + decodeString(part) + "</style>";
+				}
+			}
+
+			this.renderedCode = lang.replace(codeTemplate, codeParts);
+		},
+
+		_renderCodeDisplay: function(){
+			var codeParts = {
+					css: '\t<link rel="stylesheet" href="' + this.cdn + 'dijit/themes/' + this.theme + '/' +
+						this.theme + '.css">\n\t<link rel="stylesheet" href="' + this.cdn + 'dijit/themes/' +
+						this.theme + '/document.css">\n\t',
+					js: "<scr" + "ipt src='" + this.cdn + "dojo/dojo.js'>" + scriptClose + "\n\t",
+					bodyargs: 'class="' + this.theme + '"',
+					html: "",
+					dojoConfig: ""
+				},
+
+				locals = {
+					dataUrl: this.cdn,
+					baseUrl: this.cdn
 				};
 
 			for(var key in this.parts){
@@ -329,10 +365,9 @@ define([
 				}
 			}
 
-			this.renderedCode = lang.replace(codeTemplate, codeParts);
-			this.displayedCode = decodeString(this.renderedCode).replace(/^\t/gm, "    ");
+			this.displayedCode = decodeString(lang.replace(codeTemplate, codeParts)).replace(/^\t/gm, "    ");
 			if(has("ie")){
-				this.displayedCode = this.displayedCode.replace(/\n/g, "<br/>");
+				this.displayedCode = this.displayedCode.replace(/\n/g, "<br/>\n");
 			}
 		}
 	});
