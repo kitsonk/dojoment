@@ -1,9 +1,14 @@
 extends main
 
+prepend css
+  link(rel="stylesheet", type="text/css", href="/_static/css/wiki.css", media="all")
+
 block header
   .header
-    img(src="/_static/images/dojoToolkitLogo.png", height="32", width="71")
-    div Dojo Toolkit Live Reference Guide
+    .leader !{leader}
+    .logo
+      img(src="/_static/images/dojoToolkitLogo.png", height="32", width="71")
+    .crumbs !{crumbs}
 
 block scripts
   script(type="text/javascript")
@@ -27,7 +32,7 @@ block scripts
 
 block content
   .refdoc_wrap
-    .reftoc 
+    #toc.reftoc 
       .toc_header Contents
       .toc_content !{toc}
     .refdoc !{doc}

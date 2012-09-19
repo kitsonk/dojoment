@@ -55,16 +55,20 @@ require([
 		if(request.params[0] == "404" || /^_static/.test(request.params[0]) || /^src/.test(request.params[0])){
 			next();
 		}else{
-			var docFileName = "refdocs/" + request.params[0] + (request.params[0] === "" ? "index.mdown" : /\/$/.test(request.params[0]) ? "index.mdown" : /.mdown$/i.test(request.params[0]) ? "" : ".mdown");
+			var docFileName = "refdocs/" + request.params[0] + (request.params[0] === "" ?
+				"index.mdown" : /\/$/.test(request.params[0]) ? "index.mdown" : /\.mdown$/i.test(request.params[0]) ?
+				"" : ".mdown");
 			dfs.exists(docFileName).then(function(exists){
 				if(exists){
 					return dfs.readFile(docFileName, "utf8").then(function(data){
 						var parsedDoc = docutil.parse(data);
 						response.render("wiki", {
 							title: parsedDoc.title,
+							crumbs: docutil.crumbs(request.params[0].replace(/\/(index(\.mdown)?)?$/, "")),
 							toc: parsedDoc.toc,
 							doc: parsedDoc.doc,
 							cdn: config.repoInfo.cdn,
+							leader: config.repoInfo.title,
 							copyright: config.repoInfo.copyright
 						});
 					});

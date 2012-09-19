@@ -13,6 +13,7 @@ html, body {
 body.claro {
 	line-height: 1.5em;
 	background-color: #F7F7F7;
+	font-family: Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif;
 }
 
 blockquote {
@@ -26,6 +27,18 @@ blockquote {
 
 p {
 	margin: 1em 0;
+}
+
+h1 > a:before,
+h2 > a:before,
+h3 > a:before,
+h4 > a:before,
+h5 > a:before,
+h6 > a:before {
+	content: "";
+	display: block;
+	height: 54px;
+	margin: -54px 0 0;
 }
 
 .claro pre {
@@ -53,17 +66,57 @@ p {
 	padding: 0;
 }
 
+.header {
+	position: fixed;
+	height: 54px;
+	width: 100%;
+	background-color: #F7F7F7;
+	border-bottom: 1px solid #999999;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+}
+
+.header .logo {
+	margin: 1em;
+	float: left;
+}
+
+.header .leader {
+	margin: 1em;
+	font-size: 18px;
+	float: right;
+}
+
+.header .crumbs {
+	font-size: 18px;
+	float: left;
+	margin: 1em;
+}
+
+.header .crumbs a {
+	text-decoration: none;
+	border: 1px solid #F7F7F7;
+	color: #000080;
+}
+
+.header .crumbs a:hover {
+	border: 1px dotted #C7C7C7;
+	background-color: #FCFCFC;
+}
+
 .refdoc_wrap {
 	width: 960px;
 	margin: 0 auto;
 	border-left: 1px solid #d3d3d3;
 	border-right: 1px solid #d3d3d3;
-	padding: 2em;
+	padding: 70px 2em 2em 2em;
 	background-color: #FFFFFF;
 }
 
+.dj_ie6 .refdoc_wrap {
+	padding-top: 2em;
+}
+
 .claro .refdoc_wrap {
-	font-family: Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif;
 	font-size: 14px;
 }
 
@@ -124,6 +177,13 @@ p {
 	width: 75%;
 }
 
+.copyright {
+	font-size: 12px;
+	padding: 1em;
+	border-top: 1px solid #999999;
+	box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.15);
+}
+
 .glass > textarea {
 	display: none;
 }
@@ -171,9 +231,7 @@ p {
 .claro .CodeGlassExport {
 	display: block;
 	float: right;
-	margin-right: 0;
-	margin-top: -6px;
-	margin-left: auto;
+	margin: -6px auto 0 0;
 }
 
 .claro .dijitDialog .dijitTabPaneWrapper > .dijitContentPane {
