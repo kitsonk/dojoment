@@ -1,11 +1,13 @@
-extends main
+extends error
 
 prepend head
   title = "500 - Internal Error"
 
 block content
-  h1 Error: #{error.message}
+  h1 #{error.name}: #{error.message}
+  p An internal error has occured with the following call stack:
   pre= error.stack
+  p This error was logged, but can be reported <a href="#{bugs}" target="_blank">here</a>.
 
 block footer
   include serversig

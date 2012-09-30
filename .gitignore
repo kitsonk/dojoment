@@ -1,2 +1,6 @@
 src/dojo
 src/dijit
+src/dnode.js
+src/dnode
+lib/
+build/html

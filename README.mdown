@@ -1,6 +1,6 @@
 # dojoment #
 
-*dojoment* is an experimental project looking at the possibility of a markdown based community editable documentation wiki which can be used instead of the current solution which is based on reStructuredText.
+**dojoment** is an experimental project looking at the possibility of a markdown based community editable documentation wiki which can be used instead of the current solution which is based on reStructuredText.
 
 The main objectives of this project are:
 * Base the entire solution on JavaScript (because that is what we are about)

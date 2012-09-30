@@ -2,10 +2,10 @@ require([
 	"dojo/node!util",
 	"dojo/node!express",
 	"dojo/node!jade",
+	"dnode/dfs",
 	"dojoment-server/config",
-	"dojoment-server/dfs",
 	"dojoment-server/docutil"
-], function(util, express, jade, config, dfs, docutil){
+], function(util, express, jade, dfs, config, docutil){
 	var app = express(),
 		appPort = process.env.PORT || 8002;
 
@@ -41,7 +41,10 @@ require([
 		app.use(function(error, request, response, next){
 			response.status(error.status || 500);
 			if(request.accepts("html")){
-				response.render("500", { error: error });
+				response.render("500", {
+					error: error,
+					bugs: config.repoInfo.bugs
+				});
 			}else if(request.accepts("json")){
 				response.send({ error: error });
 			}else{

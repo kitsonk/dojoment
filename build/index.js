@@ -1,6 +1,5 @@
 
-// Initial module to load
-var serverModule = "dojoment-server/main";
+var bootModule = "build/build";
 
 // Configuration of Dojo
 dojoConfig = {
@@ -20,18 +19,12 @@ dojoConfig = {
 		name: "dijit",
 		location: "dijit"
 	},{
-		name: "dojox",
-		location: "dojox"
-	},{
-		name: "dnode",
-		location: "dnode"
-	},{
-		name: "dojoment-server",
-		location: "dojoment-server"
+		name: "build",
+		location: "../build"
 	}],
 
-	deps: [serverModule]
+	deps: [bootModule]
 };
 
 // Bootstrap
-require("./src/dojo/dojo.js");
+require("../src/dojo/dojo.js");

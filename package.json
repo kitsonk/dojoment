@@ -1,5 +1,6 @@
 {
   "name": "dojoment",
+  "description": "A Next Generation Dojo Documentation Project",
   "version": "1.0.0",
   "directories": {
     "src": "./src"
@@ -9,7 +10,6 @@
     "node": "0.8.x",
     "npm": "1.1.x"
   },
-  "description": "",
   "licenses": [
     {
       "type": "BSD",
@@ -17,6 +17,12 @@
     }
   ],
   "bugs": "https://github.com/kitsonk/dojoment/issues",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/kitsonk/dojoment.git"
+    }
+  ],
   "keywords": [
     "JavaScript",
     "Dojo",
@@ -24,6 +30,10 @@
     "Wiki"
   ],
   "homepage": "https://github.com/kitsonk/dojoment/",
+  "readme": "\n# dojoment #\n\nA Next Generation Dojo Documentation Project\n",
+  "scripts": {
+    "build": "node build"
+  },
   "dojoBuild": "dojoment.profile.js",
   "dependencies": {
     "express": "3.0.x",
@@ -34,8 +44,9 @@
   "volo": {
     "baseDir": "./src/",
     "dependencies": {
-      "dojo": "github:kitsonk/dojo/1.8.0volo",
-      "dijit": "github:kitsonk/dijit/1.8.0volo"
+      "dojo": "github:dojo/dojo/~1.8",
+      "dijit": "github:kitsonk/dijit/~1.8",
+      "dnode": "github:kitsonk/dnode/0.1.0"
     }
   }
 }
