@@ -39,7 +39,8 @@ The Dojo Toolkit and Font-Awesome and the customized fork of marked are installe
 
 *Experimental* does mean experimental, this is under heavy development and I may not remember to update the `README` every time.
 
-* Ensure you have `git`, Node.js and `npm` installed.
+* Ensure you have `git`, Node.js, `npm` and installed.
+* You will also need [cpm][cpm] or [volo][volo] to install the AMD dependencies.
 * Clone the repository recursively:
 
 ```bash
@@ -54,10 +55,27 @@ cd dojoment/refdocs
 git pull
 ```
 
+* Install AMD dependencies.
+
+	* Using **[cpm][cpm]**:
+
+	```bash
+	cd ..
+	cpm --packages-path=src install dojo
+	cpm --packages-path=src install dijit
+	cpm --packages-path=src install dnode
+	```
+
+	* Using **[volo][volo]**:
+
+	```bash
+	cd ..
+	volo install -amd
+	```
+
 * Build the client library build:
 
 ```bash
-cd ..
 src/util/buildScripts/build.sh --profile dojoment.profile.js
 ```
 
@@ -78,3 +96,5 @@ You will get a message indicating that the server is running and what port it is
 [hljs]: http://softwaremaniacs.org/soft/highlight/en/
 [stylus]: http://learnboost.github.com/stylus/
 [fontawesome]: http://fortawesome.github.com/Font-Awesome/
+[volo]: http://volojs.org/
+[cpm]: https://github.com/kriszyp/cpm/
