@@ -43,47 +43,47 @@ The Dojo Toolkit and Font-Awesome and the customized fork of marked are installe
 * You will also need [cpm][cpm] or [volo][volo] to install the AMD dependencies.
 * Clone the repository recursively:
 
-```bash
-git clone --recursive https://github.com/kitsonk/dojoment.git
-```
+	```bash
+	git clone --recursive https://github.com/kitsonk/dojoment.git
+	```
 
 * Update the `config.json`.
 * Update the reference docs repository:
 
-```bash
-cd dojoment/refdocs
-git pull
-```
+	```bash
+	cd dojoment/refdocs
+	git pull
+	```
 
 * Install AMD dependencies.
 
 	* Using **[cpm][cpm]**:
 
-	```bash
-	cd ..
-	cpm --packages-path=src install dojo
-	cpm --packages-path=src install dijit
-	cpm --packages-path=src install dnode
-	```
+		```bash
+		cd ..
+		cpm --packages-path=src install dojo
+		cpm --packages-path=src install dijit
+		cpm --packages-path=src install dnode
+		```
 
 	* Using **[volo][volo]**:
 
-	```bash
-	cd ..
-	volo install -amd
-	```
+		```bash
+		cd ..
+		volo install -amd
+		```
 
 * Build the client library build:
 
-```bash
-src/util/buildScripts/build.sh --profile dojoment.profile.js
-```
+	```bash
+	src/util/buildScripts/build.sh --profile dojoment.profile.js
+	```
 
 * Start the server:
 
-```bash
-node server.js
-```
+	```bash
+	node server
+	```
 
 You will get a message indicating that the server is running and what port it is running on.
 
