@@ -2,7 +2,7 @@ require([
 	"dojo/node!util",
 	"dojo/node!express",
 	"dojo/node!jade",
-	"dnode/dfs",
+	"setten/dfs",
 	"dojoment-server/config",
 	"dojoment-server/docutil"
 ], function(util, express, jade, dfs, config, docutil){

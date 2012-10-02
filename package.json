@@ -45,8 +45,8 @@
     "baseDir": "./src/",
     "dependencies": {
       "dojo": "github:dojo/dojo/~1.8",
-      "dijit": "github:kitsonk/dijit/~1.8",
-      "dnode": "github:kitsonk/dnode/0.1.0"
+      "dijit": "github:dojo/dijit/~1.8",
+      "setten": "github:kitsonk/setten"
     }
   }
 }

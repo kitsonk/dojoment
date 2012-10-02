@@ -1,6 +1,6 @@
 src/dojo
 src/dijit
-src/dnode.js
-src/dnode
+src/setten.js
+src/setten
 lib/
 build/html

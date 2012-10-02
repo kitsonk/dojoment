@@ -16,8 +16,8 @@ dojoConfig = {
 		name: "dojo",
 		location: "dojo"
 	},{
-		name: "dijit",
-		location: "dijit"
+		name: "setten",
+		location: "setten"
 	},{
 		name: "build",
 		location: "../build"

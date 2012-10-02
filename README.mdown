@@ -32,6 +32,7 @@ Additional libraries are licensed and copyrighted by their respective owners.
 * [highlight.js][hljs] - Requires v7.1.0 or later
 * [stylus][stylus] - Requires v0.29.0 or later
 * [Font-Awesome][fontawesome] - Requires v2.0 or later
+* [setten][setten] - Requires v0.1.1 or later
 
 The Dojo Toolkit and Font-Awesome and the customized fork of marked are installed as submodules and can be managed by `git`.  express, jade, highlight.js and stylus are installed as node modules and can be managed via `npm`.
 
@@ -63,7 +64,7 @@ The Dojo Toolkit and Font-Awesome and the customized fork of marked are installe
 		cd ..
 		cpm --packages-path=src install dojo
 		cpm --packages-path=src install dijit
-		cpm --packages-path=src install dnode
+		cpm --packages-path=src install setten
 		```
 
 	* Using **[volo][volo]**:
@@ -87,6 +88,10 @@ The Dojo Toolkit and Font-Awesome and the customized fork of marked are installe
 
 You will get a message indicating that the server is running and what port it is running on.
 
+## Generating Static Documentation ##
+
+In order to generate all the reference documentation
+
 [bsd]: /kitsonk/dojoment/blob/master/LICENSE
 [nodejs]: http://nodejs.org/download/
 [dojo]: http://dojotoolkit.org/download/
@@ -98,3 +103,4 @@ You will get a message indicating that the server is running and what port it is
 [fontawesome]: http://fortawesome.github.com/Font-Awesome/
 [volo]: http://volojs.org/
 [cpm]: https://github.com/kriszyp/cpm/
+[setten]: https://github.com/kitsonk/setten/

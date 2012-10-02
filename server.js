@@ -17,14 +17,8 @@ dojoConfig = {
 		name: "dojo",
 		location: "dojo"
 	},{
-		name: "dijit",
-		location: "dijit"
-	},{
-		name: "dojox",
-		location: "dojox"
-	},{
-		name: "dnode",
-		location: "dnode"
+		name: "setten",
+		location: "setten"
 	},{
 		name: "dojoment-server",
 		location: "dojoment-server"
