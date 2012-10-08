@@ -46,7 +46,7 @@
     "dependencies": {
       "dojo": "github:dojo/dojo/~1.8",
       "dijit": "github:dojo/dijit/~1.8",
-      "setten": "github:kitsonk/setten"
+      "setten": "github:kitsonk/setten/0.1.2"
     }
   }
 }

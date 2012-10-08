@@ -9,4 +9,4 @@
 	url = https://github.com/FortAwesome/Font-Awesome.git
 [submodule "src/util"]
 	path = src/util
-	url = git@github.com:dojo/util.git
+	url = https://github.com/dojo/util.git

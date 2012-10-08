@@ -5,7 +5,7 @@ var bootModule = "build/build";
 dojoConfig = {
 	baseUrl: "src/",
 	async: 1,
-	deferredInstrumentation: 0,
+	deferredInstrumentation: 1,
 
 	hasCache: {
 		"host-node": 1,
@@ -18,6 +18,9 @@ dojoConfig = {
 	},{
 		name: "setten",
 		location: "setten"
+	},{
+		name: "dojoment-server",
+		location: "dojoment-server"
 	},{
 		name: "build",
 		location: "../build"
