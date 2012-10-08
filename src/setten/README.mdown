@@ -1,0 +1,78 @@
+# setten #
+
+Dojo Toolkit style utilities and wrappers for Node.
+
+This package is designed to provide Dojo-style AMD modules to make working with NodeJS more the "Dojo way".
+
+## License ##
+
+This code is licensed under the ["New" BSD License][license].
+
+## Installation ##
+
+Via **[cpm][cpm]**:
+
+```bash
+$ cpm install setten
+```
+
+Via **[volo][volo]**:
+
+```bash
+$ volo add kitsonk/setten
+```
+
+## Tests ##
+
+The unit tests included with the package leverage the [Dojo Objective Harness][doh] (D.O.H.).  In order to leverage
+D.O.H. it is assumed that the `dojo` package and the `util` directory of Dojo which contains the `doh` package are 
+installed as siblings of the `setten` package, for example:
+
+```
+lib/dojo
+lib/setten
+lib/util/doh
+```
+
+This can be changed by modifying the `setten/tests/index.js` package map.
+
+The execute the tests, execute the following command from the `/setten` directory:
+
+```bash
+$ node tests
+```
+
+## Modules ##
+
+### setten/dfs ###
+
+This is a wrapper for the NodeJS `fs` module, that takes the asynchronous calls and converts them into 
+a `dojo/promise` Promise based return.
+
+For example, you might have written code like this in "plain" NodeJS:
+
+```js
+var fs = require("fs");
+
+fs.readFile("/etc/passwd", function(err, data){
+	if(err) throw err;
+	console.log(data);
+});
+```
+
+This could now be rewritten as:
+
+```js
+require(["setten/dfs"], function(dfs){
+	dfs.readFile("/etc/passwd").then(function(data){
+		console.log(data);
+	}, function(err){
+		throw err;
+	});
+});
+```
+
+[license]: https://github.com/kitsonk/setten/blob/master/LICENSE
+[cpm]: https://github.org/kriszyp/cpm
+[volo]: http://volojs.org/
+[doh]: http://dojotoolkit.org/reference-guide/1.8/util/doh.html

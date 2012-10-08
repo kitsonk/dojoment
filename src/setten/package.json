@@ -1,0 +1,36 @@
+{
+  "name": "setten",
+  "description": "Dojo-style wrappers for NodeJS",
+  "version": "0.1.2",
+  "main": "main",
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/kitsonk/setten/blob/master/LICENSE"
+    }
+  ],
+  "bugs": "https://github.com/kitsonk/setten/issues",
+  "repositories": [{
+    "type": "git",
+    "url": "https://github.com/kitsonk/setten.git"
+  }],
+  "keywords": [
+    "JavaScript",
+    "Dojo",
+    "Node",
+    "Utilities"
+  ],
+  "homepage": "https://github.com/kitsonk/setten/",
+  "readme": "\n# setten #\n\nDojo-style wrappers for NodeJS\n",
+  "dojoBuild": "setten.profile.js",
+  "dependencies": {
+    "dojo": "~1.8"
+  },
+  "icon": "https://raw.github.com/kitsonk/setten/master/resources/setten_icon.png",
+  "volo": {
+    "baseDir": "./src/",
+    "dependencies": {
+      "dojo": "github:dojo/dojo/~1.8"
+    }
+  }
+}
