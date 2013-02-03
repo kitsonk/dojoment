@@ -7,3 +7,6 @@
 [submodule "src/util"]
 	path = src/util
 	url = https://github.com/dojo/util.git
+[submodule "src/marked"]
+	path = src/marked
+	url = git@github.com:kitsonk/marked.git

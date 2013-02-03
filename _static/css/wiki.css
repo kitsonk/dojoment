@@ -15,16 +15,17 @@ blockquote {
   padding: 0.25em 1em;
   font-size: 1em;
 }
-h1 > a:before,
-h2 > a:before,
-h3 > a:before,
-h4 > a:before,
-h5 > a:before,
-h6 > a:before {
-  content: "";
-  display: block;
-  height: 54px;
-  margin: -54px 0 0;
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+  border-top: 58px solid transparent;
+  margin-top: -58px;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
 }
 .claro {
   line-height: 1.5em;

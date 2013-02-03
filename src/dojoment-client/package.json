@@ -25,5 +25,5 @@
     },
     "main": "main",
     "homepage": "http://kitsonk.github.com/dojoment/",
-    "dojoBuild": "dojoment-client.profile.js"
+    "dojoBuild": "profile.js"
 }

@@ -1,4 +1,4 @@
-require([
+define([
 	"dojo/_base/array",
 	"dojo/_base/lang",
 	"dojo/dom",
@@ -7,7 +7,7 @@ require([
 	"dojo/dom-style",
 	"dojo/query",
 	"dojo/ready",
-	"dojoment-client/CodeGlass"
+	"./CodeGlass"
 ], function(array, lang, dom, domConst, domGeom, style, query, ready, CodeGlass){
 	var glasses = [];
 	ready(function(){
