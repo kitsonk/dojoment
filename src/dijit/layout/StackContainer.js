@@ -97,7 +97,7 @@ var StackContainer = declare("dijit.layout.StackContainer", _LayoutWidget, {
 		// Publish information about myself so any StackControllers can initialize.
 		// This needs to happen before this.inherited(arguments) so that for
 		// TabContainer, this._contentBox doesn't include the space for the tab labels.
-		topic.publish(this.id+"-startup", {children: children, selected: selected, textDir:this.textDir});
+		topic.publish(this.id+"-startup", {children: children, selected: selected});
 
 		// Startup each child widget, and do initial layout like setting this._contentBox,
 		// then calls this.resize() which does the initial sizing on the selected child.
@@ -158,8 +158,6 @@ var StackContainer = declare("dijit.layout.StackContainer", _LayoutWidget, {
 	removeChild: function(/*dijit/_WidgetBase*/ page){
 		// Overrides _Container.removeChild() to do layout and publish events
 
-		var idx = array.indexOf(this.getChildren(), page);
-
 		this.inherited(arguments);
 
 		if(this._started){
@@ -178,7 +176,7 @@ var StackContainer = declare("dijit.layout.StackContainer", _LayoutWidget, {
 			if(this._started){
 				var children = this.getChildren();
 				if(children.length){
-					this.selectChild(children[Math.max(idx-1, 0)]);
+					this.selectChild(children[0]);
 				}
 			}
 		}

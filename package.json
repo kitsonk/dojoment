@@ -36,17 +36,21 @@
   },
   "dojoBuild": "dojoment.profile.js",
   "dependencies": {
-    "express": "3.0.x",
-    "jade": "0.27.x",
-    "highlight.js": "7.1.x",
-    "stylus": "0.29.0"
+    "express": "3.1.x",
+    "jade": "0.28.x",
+    "highlight.js": "7.3.x",
+    "stylus": "0.32.x",
+    "marked": "0.2.x",
+    "nib": "~0.9.1",
+    "colors": "~0.6.0-1"
   },
   "volo": {
     "baseDir": "./src/",
     "dependencies": {
-      "dojo": "github:dojo/dojo/~1.8",
-      "dijit": "github:dojo/dijit/~1.8",
-      "setten": "github:kitsonk/setten/0.1.2"
+      "dojo": "github:dojo/dojo/1.8.3",
+      "dijit": "github:dojo/dijit/1.8.3",
+      "setten": "github:kitsonk/setten/0.1.3",
+      "marked": "https://github.com/chjj/marked/archive/master.zip"
     }
   }
 }

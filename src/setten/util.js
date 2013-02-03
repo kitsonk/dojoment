@@ -2,26 +2,30 @@ define([
 	"dojo/Deferred"
 ], function(Deferred){
 
-	var asDeferred = function(f, noError){
+	var asDeferred = function(/*Function*/ f, /*Object*/ self, /*Boolean*/ noError){
+		self = self || this;
 		return noError ? function(){
 			var d = new Deferred(),
 				args = Array.prototype.slice.call(arguments);
-			args.push(function(data){
-				d.resolve(data);
+			args.push(function(){
+				var args = Array.prototype.slice.call(arguments);
+				d.resolve(args.length > 1 ? args : args[0]);
 			});
-			f.apply(this, args);
+			f.apply(self, args);
 			return d.promise;
 		} : function(){
 			var d = new Deferred(),
 				args = Array.prototype.slice.call(arguments);
-			args.push(function(err, data){
+			args.push(function(){
+				var args = Array.prototype.slice.call(arguments),
+					err = args.shift();
 				if(err){
 					d.reject(err);
 				}else{
-					d.resolve(data);
+					d.resolve(args.length > 1 ? args : args[0]);
 				}
 			});
-			f.apply(this, args);
+			f.apply(self, args);
 			return d.promise;
 		};
 	};

@@ -474,7 +474,7 @@ declare(
 				ownerDocument: this.ownerDocument,
 				dir: page.dir,
 				lang: page.lang,
-				textDir: page.textDir || container.textDir,
+				textDir: page.textDir,
 				onClick: function(){
 					container.selectChild(page);
 				}

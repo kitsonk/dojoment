@@ -35,7 +35,7 @@ define([
 		// closeButton: Boolean
 		//		When true, display close button for this tab
 		closeButton: false,
-
+		
 		_aria_attr: "aria-selected",
 
 		buildRendering: function(/*Event*/ evt){
@@ -116,7 +116,6 @@ define([
 			//		Called after StackContainer has finished initializing
 			// tags:
 			//		private
-			this.textDir = info.textDir;
 			array.forEach(info.children, this.onAddChild, this);
 			if(info.selected){
 				// Show button corresponding to selected pane (unless selected
@@ -180,7 +179,7 @@ define([
 				ownerDocument: this.ownerDocument,
 				dir: page.dir,
 				lang: page.lang,
-				textDir: page.textDir || this.textDir,
+				textDir: page.textDir,
 				showLabel: page.showTitle,
 				iconClass: page.iconClass,
 				closeButton: page.closable,

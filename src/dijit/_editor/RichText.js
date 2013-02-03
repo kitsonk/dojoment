@@ -15,7 +15,7 @@ define([
 	"dojo/_base/lang", // lang.clone lang.hitch lang.isArray lang.isFunction lang.isString lang.trim
 	"dojo/on", // on()
 	"dojo/query", // query
-	"dojo/domReady",
+	"dojo/ready", // ready
 	"dojo/sniff", // has("ie") has("mozilla") has("opera") has("safari") has("webkit")
 	"dojo/topic",	// topic.publish() (publish)
 	"dojo/_base/unload", // unload
@@ -29,7 +29,7 @@ define([
 	"../focus",
 	"../main"	// dijit._scopeName
 ], function(array, config, declare, Deferred, dom, domAttr, domClass, domConstruct, domGeometry, domStyle,
-	event, kernel, keys, lang, on, query, domReady, has, topic, unload, _Url, win,
+	event, kernel, keys, lang, on, query, ready, has, topic, unload, _Url, win,
 	_Widget, _CssStateMixin, selectionapi, rangeapi, htmlapi, focus, dijit){
 
 // module:
@@ -854,7 +854,7 @@ var RichText = declare("dijit._editor.RichText", [_Widget, _CssStateMixin], {
 			if(this.focusOnLoad){
 				// after the document loads, then set focus after updateInterval expires so that
 				// onNormalizedDisplayChanged has run to avoid input caret issues
-				domReady(lang.hitch(this, "defer", "focus", this.updateInterval));
+				ready(lang.hitch(this, "defer", "focus", this.updateInterval));
 			}
 			// Save off the initial content now
 			this.value = this.getValue(true);

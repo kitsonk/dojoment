@@ -126,4 +126,6 @@ define([
 			};
 		}
 	};
+
+	return ret;
 });

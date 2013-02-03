@@ -56,9 +56,17 @@ define([
 	}
 
 	function _addDeadScript(dfd){
-		var response = dfd.response;
-		deadScripts.push({ id: dfd.id, frameDoc: response.options.frameDoc });
-		response.options.frameDoc = null;
+		// Be sure to check ioArgs because it can dynamically change in the dojox/io plugins.
+		// See http://bugs.dojotoolkit.org/ticket/15890.
+		var options = dfd.response.options,
+			frameDoc = options.ioArgs ? options.ioArgs.frameDoc : options.frameDoc;
+
+		deadScripts.push({ id: dfd.id, frameDoc: frameDoc });
+
+		if(options.ioArgs){
+			options.ioArgs.frameDoc = null;
+		}
+		options.frameDoc = null;
 	}
 
 	function canceler(dfd, response){
@@ -121,8 +129,8 @@ define([
 		});
 
 		if(options.jsonp){
-			var queryParameter = (~url.indexOf('?') ? '&' : '?') + options.jsonp + '=';
-			if(url.indexOf(queryParameter) === -1){
+			var queryParameter = new RegExp('[?&]' + options.jsonp + '=');
+			if(!queryParameter.test(url)){
 				url += queryParameter +
 					(options.frameDoc ? 'parent.' : '') +
 					mid + '_callbacks.' + dfd.id;

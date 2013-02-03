@@ -110,18 +110,10 @@ return declare("dijit.form.Button", [_FormWidget, _ButtonMixin], {
 		this.inherited(arguments);
 		if(!this.showLabel && !("title" in this.params)){
 			this.titleNode.title = lang.trim(this.containerNode.innerText || this.containerNode.textContent || '');
-			if(this.textDir && this.titleNode.title){
-				this.applyTextDir(this.titleNode, this.titleNode.title);
-			}
-		}
-	},
-
-	_setTextDirAttr: function(/*String*/ textDir){
-		if(this._created && this.textDir != textDir){
-			this._set("textDir", textDir);
-			this._setLabelAttr(this.label); // call applyTextDir on both focusNode and titleNode
 		}
 	}
 });
 
+
 });
+

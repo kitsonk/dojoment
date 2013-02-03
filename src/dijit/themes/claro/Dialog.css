@@ -79,7 +79,7 @@
   background-image: -moz-linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
   background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
   background-image: -o-linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
-  background-image: -ms-linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 100%);
   _background-image: none;
   padding: 5px 7px 4px 7px;
 }
@@ -138,7 +138,7 @@
   background-image: -moz-linear-gradient(bottom, rgba(207, 229, 250, 0.1) 0px, #ffffff 10px);
   background-image: -webkit-linear-gradient(bottom, rgba(207, 229, 250, 0.1) 0px, #ffffff 10px);
   background-image: -o-linear-gradient(bottom, rgba(207, 229, 250, 0.1) 0px, #ffffff 10px);
-  background-image: -ms-linear-gradient(bottom, rgba(207, 229, 250, 0.1) 0px, #ffffff 10px);
+  background-image: linear-gradient(bottom, rgba(207, 229, 250, 0.1) 0px, #ffffff 10px);
   background-position: bottom;
   border: 1px solid #759dc0;
   padding: 6px 8px;
@@ -163,6 +163,13 @@
 .dj_ie6 .claro .dijitTooltipConnector {
   background-image: url("images/tooltip8bit.png");
 }
+.claro .dijitTooltipABRight .dijitTooltipConnector {
+  /* above or below tooltip, but the arrow appears on the right,
+		and the right edges of target and tooltip are aligned rather than the left */
+
+  left: auto !important;
+  right: 3px;
+}
 .claro .dijitTooltipBelow .dijitTooltipConnector {
   /* the arrow piece for tooltips below an element */
 
@@ -183,14 +190,6 @@
 }
 .dj_ie7 .claro .dijitTooltipAbove .dijitTooltipConnector, .dj_ie6 .claro .dijitTooltipAbove .dijitTooltipConnector {
   bottom: -1px;
-}
-.claro .dijitTooltipABRight .dijitTooltipConnector {
-  /* above or below tooltip, but the arrow appears on the right,
-		and the right edges of target and tooltip are aligned rather than the left.
-		Override above rules for .dijitTooltipBelow, .dijitTooltipAbove */
-
-  left: auto;
-  right: 3px;
 }
 .claro .dijitTooltipLeft {
   padding-right: 14px;

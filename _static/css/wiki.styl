@@ -1,0 +1,214 @@
+@import url("../../src/dojoment-client/resources/client.css")
+@import url("../Font-Awesome/css/font-awesome.css")
+@import "nib"
+
+light-gray-bg-color = #f7f7f7
+blockquote-color = #d3d3d3
+dark-gray-border-color = #999999
+link-color = #000080
+
+html
+body
+  margin 0
+  padding 0
+  width 100%
+  height 100%
+
+blockquote
+  border-top none
+  border-bottom none
+  border-left 2px solid blockquote-color
+  margin 1em 0
+  padding 0.25em 1em
+  font-size 1em
+
+h1
+h2
+h3
+h4
+h5
+h6
+  > a:before
+    content ""
+    display block
+    height 54px
+    margin -54px 0 0
+
+.claro
+  line-height 1.5em
+  background-color light-gray-bg-color
+  font-family Arial,Helvetica,"Liberation Sans",FreeSans,sans-serif
+  pre
+    background-color light-gray-bg-color
+    box-shadow 0 4px 4px -3px rgba(black, 0.5)
+    font-family "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace
+    line-height 1.1em
+    font-size 13px
+    padding 10px
+    margin 12px 0 0 0
+    overflow auto
+    > code
+      border none
+      background none
+      font-size 100%
+      padding 0
+  code
+    background-color light-gray-bg-color
+    font-family "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace
+    font-size 95%
+    padding 2px
+  .refdoc_wrap
+    font-size 14px
+  .CodeGlassRun
+  .CodeGlassCode
+  .CodeGlassCollapse
+  .CodeGlassExport 
+    border 1px solid #AAAAAA
+    box-shadow 0 1px 1px rgba(0, 0, 0, 0.15)
+    border-radius 4px
+    margin 0 10px 10px 0
+    padding 4px 8px 4px 10px
+    text-decoration none
+    color #000000
+    background-color #eeeeee
+    &hover
+      color #0033dd
+      border-color #cccccc
+  .CodeGlassExport 
+    display block
+    float right
+    margin -6px auto 0 0
+  .dijitDialog .dijitTabPaneWrapper > .dijitContentPane 
+    padding 0
+    overflow hidden
+    .dijitContentPane 
+      margin 0
+      padding 0
+      overflow hidden
+    textarea
+      padding 0.5em
+      border none
+      font-family "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace
+      line-height 1.1em
+      font-size 13px
+      height 99%
+      width 99%      
+  .dijitDialogPaneContent 
+    font-size 14px
+
+.header
+  position fixed
+  height 54px
+  width 100%
+  background-color light-gray-bg-color
+  border-bottom 1px solid dark-gray-border-color
+  box-shadow 0 2px 2px rgba(black, 0.15)
+  .logo
+    margin 1em
+    float left
+  .leader 
+    margin 1em
+    font-size 18px
+    float right
+  .crumbs 
+    font-size 18px
+    float left
+    margin 1em
+    a 
+      text-decoration none
+      border 1px solid light-gray-bg-color
+      color link-color
+      &:hover
+        border 1px dotted #c7c7c7
+        background-color #fcfcfc
+
+.refdoc_wrap 
+  width 960px
+  margin 0 auto
+  border-left 1px solid #d3d3d3
+  border-right 1px solid #d3d3d3
+  padding 70px 2em 2em 2em
+  background-color white
+
+.dj_ie6 .refdoc_wrap 
+  padding-top 2em
+
+.reftoc 
+  float right
+  width 20%
+
+.toc_header 
+  border 1px solid #aaaaaa
+  box-shadow 0 1px 1px rgba(black, 0.15)
+  border-radius 4px
+  margin 0 0 10px 0
+  padding 4px
+  color black
+  text-align center
+  background-color #EEEEEE
+  background-image linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216))
+
+.toc_content 
+  font-size 0.95em
+  > ul 
+    margin 0
+    padding 0
+    > li 
+      display block
+      ul 
+        padding-left 1.5em
+      li 
+        color #999999
+  a 
+    color #666666
+    text-decoration none
+    &:hover 
+      border-bottom 1px dotted #AAAAAA
+
+.refdoc 
+  width 75%
+  table
+    border-collapse collapse
+    border-bottom 1px solid #cccccc
+    thead
+      th
+        font-weight bold
+        padding 0.4em
+        background-color #eeeeee
+        background-image linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216))
+        border-bottom 1px solid #cccccc
+        border-top 1px solid #cccccc
+    tbody
+      tr:nth-child(even)
+        background #f3f3f3
+      td
+        padding 0.2em
+        vertical-align top
+    &.vertical
+      border-bottom none
+      tbody
+        tr:nth-child(even)
+          background none
+        th
+          font-weight bold
+          padding 0.2em 0.4em
+          background-color #eeeeee
+          border-right 2px solid #cccccc
+
+.copyright 
+  font-size 12px
+  padding 1em
+  border-top 1px solid #999999
+  box-shadow 0 -2px 2px rgba(black, 0.15)
+
+.lang-codeglass > textarea 
+  display none
+
+.CodeGlass 
+  border 1px solid #d3d3d3
+  margin 1.5em 0
+  padding 12px 6px
+  box-shadow 0 4px 4px -3px rgba(0, 0, 0, 0.5)
+  pre 
+    box-shadow none
+

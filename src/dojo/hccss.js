@@ -1,13 +1,12 @@
 define([
-	"require",			// require, require.toUrl
+	"require",			// require.toUrl
 	"./_base/config", // config.blankGif
 	"./dom-class", // domClass.add
-	"./dom-construct", // domConstruct.destroy
 	"./dom-style", // domStyle.getComputedStyle
 	"./has",
-	"./domReady",
+	"./ready", // ready
 	"./_base/window" // win.body
-], function(require, config, domClass, domConstruct, domStyle, has, domReady, win){
+], function(require, config, domClass, domStyle, has, ready, win){
 
 	// module:
 	//		dojo/hccss
@@ -34,12 +33,18 @@ define([
 			hc = (cs.borderTopColor == cs.borderRightColor) ||
 				(bkImg && (bkImg == "none" || bkImg == "url(invalid-url:)" ));
 
-		domConstruct.destroy(div);
+		if(has("ie") <= 8){
+			div.outerHTML = "";		// prevent mixed-content warning, see http://support.microsoft.com/kb/925014
+		}else{
+			win.body().removeChild(div);
+		}
 
 		return hc;
 	});
 
-	domReady(function(){
+	// Priority is 90 to run ahead of parser priority of 100.   For 2.0, remove the ready() call and instead
+	// change this module to depend on dojo/domReady!
+	ready(90, function(){
 		if(has("highcontrast")){
 			domClass.add(win.body(), "dj_a11y");
 		}

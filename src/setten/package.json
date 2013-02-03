@@ -1,7 +1,7 @@
 {
   "name": "setten",
   "description": "Dojo-style wrappers for NodeJS",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "main",
   "licenses": [
     {
@@ -21,7 +21,7 @@
     "Utilities"
   ],
   "homepage": "https://github.com/kitsonk/setten/",
-  "readme": "\n# setten #\n\nDojo-style wrappers for NodeJS\n",
+  "readmeFilename": "README.mdown",
   "dojoBuild": "setten.profile.js",
   "dependencies": {
     "dojo": "~1.8"

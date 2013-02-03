@@ -94,7 +94,9 @@ var _TextBoxMixin = declare("dijit.form._TextBoxMixin", null, {
 			this._set("displayedValue", this.get("displayedValue"));
 		}
 
-		this.applyTextDir(this.focusNode);
+		if(this.textDir == "auto"){
+			this.applyTextDir(this.focusNode, formattedValue);
+		}
 
 		this.inherited(arguments, [filteredValue, priorityChange]);
 	},
@@ -151,7 +153,9 @@ var _TextBoxMixin = declare("dijit.form._TextBoxMixin", null, {
 		this._set("displayedValue", this.get('displayedValue'));
 
 		// textDir support
-		this.applyTextDir(this.focusNode);
+		if(this.textDir == "auto"){
+			this.applyTextDir(this.focusNode, value);
+		}
 	},
 
 	format: function(value /*=====, constraints =====*/){
@@ -203,7 +207,9 @@ var _TextBoxMixin = declare("dijit.form._TextBoxMixin", null, {
 		//		Called AFTER the input event has happened
 
 		// set text direction according to textDir that was defined in creation
-		this.applyTextDir(this.focusNode);
+		if(this.textDir == "auto"){
+			this.applyTextDir(this.focusNode, this.focusNode.value);
+		}
 
 		this._processInput(evt);
 	},
@@ -421,6 +427,25 @@ var _TextBoxMixin = declare("dijit.form._TextBoxMixin", null, {
 		// Additionally resets the displayed textbox value to ''
 		this.textbox.value = '';
 		this.inherited(arguments);
+	},
+
+	_setTextDirAttr: function(/*String*/ textDir){
+		// summary:
+		//		Setter for textDir.
+		// description:
+		//		Users shouldn't call this function; they should be calling
+		//		set('textDir', value)
+		// tags:
+		//		private
+
+		// only if new textDir is different from the old one
+		// and on widgets creation.
+		if(!this._created
+			|| this.textDir != textDir){
+				this._set("textDir", textDir);
+				// so the change of the textDir will take place immediately.
+				this.applyTextDir(this.focusNode, this.focusNode.value);
+		}
 	}
 });
 

@@ -1,6 +1,6 @@
 define([
 	"dojo/node!highlight.js",
-	"dojo/node!marked"
+	"src/marked.js"
 ], function(hljs, marked){
 
 	var glassify = function(code){
@@ -97,17 +97,17 @@ define([
 				}
 				if(cap = paragraph.exec(code)){
 					code = code.substring(cap[0].length);
-					output.push("<p>" + marked.inline(stripIndent(cap[0])) + "</p>\n");
+					output.push("<p>" + marked.InlineLexer(stripIndent(cap[0])) + "</p>\n");
 					continue;
 				}
 				if(cap = text.exec(code)){
 					code = code.substring(cap[0].length);
-					output.push(marked.inline(stripIndent(cap[0])));
+					output.push(marked.InlineLexer(stripIndent(cap[0])));
 					continue;
 				}
 			}
 			parts.dojoConfig = parts.dojoConfig || "parseOnLoad: true";
-			return '<div class="glass"><textarea class="parts">' + JSON.stringify(parts) + "</textarea>\n" + output.join("\n") + '</div>';
+			return '<textarea class="parts">' + JSON.stringify(parts) + "</textarea>\n" + output.join("\n");
 		},
 
 		highlight = function(code, lang){
@@ -133,6 +133,9 @@ define([
 				case "markdown":
 				case "xml":
 					code = hljs.highlight(lang, code).value;
+					break;
+				case "codeglass":
+					code = glassify(code);
 					break;
 			}
 			return code;
@@ -198,8 +201,7 @@ define([
 		gfm: true,
 		pendantic: false,
 		anchors: true,
-		highlight: highlight,
-		codeglass: glassify
+		highlight: highlight
 	});
 
 	return {

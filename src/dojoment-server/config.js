@@ -1,6 +1,5 @@
 define([
-	"dojo/text!config.json",
-	"dojo/json"
-], function(configJSON, JSON){
-	return JSON.parse(configJSON);
+	"dojo/text!config.json"
+], function(configJSON){
+	return JSON.parse(configJSON)[process.env.NODE_ENV || "development"];
 });

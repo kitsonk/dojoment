@@ -1,11 +1,11 @@
 define([
 	"dojo/Evented",
 	"dojo/on",
-	"dojo/domReady",
+	"dojo/ready",
 	"dojo/sniff",
 	"dojo/_base/window", // global
 	"dojo/window" // getBox()
-], function(Evented, on, domReady, has, win, winUtils){
+], function(Evented, on, ready, has, win, winUtils){
 
 	// module:
 	//		dijit/Viewport
@@ -25,7 +25,7 @@ define([
 
 	var Viewport = new Evented();
 
-	domReady(function(){
+	ready(200, function(){
 		var oldBox = winUtils.getBox();
 		Viewport._rlh = on(win.global, "resize", function(){
 			var newBox = winUtils.getBox();

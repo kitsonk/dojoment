@@ -65,24 +65,12 @@ define([
 		// label: String
 		//		Title of the pane
 		label: "",
-		_setLabelAttr: function(label){
-			this._set("label", label);
-			domAttr.set(this.titleTextNode, "innerHTML", label);
-			if(this.textDir){
-				this.applyTextDir(this.titleTextNode);
-			}
-		},
+		_setLabelAttr: {node: "titleTextNode", type: "innerHTML" },
 
 		// title: String
 		//		Tooltip that appears on hover
 		title: "",
-		_setTitleAttr: function(title){
-			this._set("title", title);
-			domAttr.set(this.titleTextNode, "title", title);
-			if(this.textDir){
-				this.applyTextDir(this.titleTextNode);
-			}
-		},
+		_setTitleAttr: {node: "titleTextNode", type: "attribute", attribute: "title"},
 
 		// iconClassAttr: String
 		//		CSS class for icon to left of label
@@ -182,7 +170,7 @@ define([
 				title: child.tooltip,
 				dir: child.dir,
 				lang: child.lang,
-				textDir: child.textDir || this.textDir,
+				textDir: child.textDir,
 				iconClass: child.iconClass,
 				id: child.id + "_button",
 				parent: this.parent
@@ -339,7 +327,7 @@ define([
 				id: child.id + "_wrapper",
 				dir: child.dir,
 				lang: child.lang,
-				textDir: child.textDir || this.textDir,
+				textDir: child.textDir,
 				parent: this
 			});
 

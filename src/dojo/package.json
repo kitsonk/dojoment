@@ -1,6 +1,6 @@
 {
 	"name": "dojo",
-	"version":"1.9.0dev",
+	"version":"1.8.3",
 	"directories": {
 		"lib": "."
 	},
@@ -19,12 +19,5 @@
 	"bugs": "http://bugs.dojotoolkit.org/",
 	"keywords": ["JavaScript", "Dojo", "Toolkit"],
 	"homepage": "http://dojotoolkit.org/",
-	"amd": {},
-	"volo": {
-		"baseDir": "../",
-		"url": "https://github.com/kitsonk/dojo/zipball/{version}",
-		"dependencies": {},
-		"type": "directory"
-	},
 	"dojoBuild": "dojo.profile.js"
 }

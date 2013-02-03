@@ -77,11 +77,7 @@ return declare("dijit.form._ButtonMixin", null, {
 		// description:
 		//		Set the label (text) of the button; takes an HTML string.
 		this._set("label", content);
-		var labelNode = this.containerNode || this.focusNode;
-		labelNode.innerHTML = content;
-		if(this.textDir){
-			this.applyTextDir(labelNode);
-		}
+		(this.containerNode||this.focusNode).innerHTML = content;
 	}
 });
 

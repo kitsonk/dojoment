@@ -1,6 +1,6 @@
 
 // Initial module to load
-var serverModule = "dojoment-server/main";
+var loadModule = "dojoment-server/server";
 
 // Configuration of Dojo
 dojoConfig = {
@@ -16,15 +16,18 @@ dojoConfig = {
 	packages: [{
 		name: "dojo",
 		location: "dojo"
-	},{
+	}, {
 		name: "setten",
 		location: "setten"
-	},{
+	}, {
 		name: "dojoment-server",
 		location: "dojoment-server"
+	}, {
+		name: "marked",
+		location: "marked"
 	}],
 
-	deps: [serverModule]
+	deps: [loadModule]
 };
 
 // Bootstrap

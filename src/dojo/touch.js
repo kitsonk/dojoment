@@ -1,12 +1,12 @@
-define(["./_base/kernel", "./_base/lang", "./aspect", "./dom", "./on", "./has", "./mouse", "./domReady", "./_base/window"],
-function(dojo, lang, aspect, dom, on, has, mouse, domReady, win){
+define(["./_base/kernel", "./aspect", "./dom", "./on", "./has", "./mouse", "./ready", "./_base/window"],
+function(dojo, aspect, dom, on, has, mouse, ready, win){
 
 	// module:
 	//		dojo/touch
 
 	var hasTouch = has("touch");
 
-	// TODO for 2.0: detection of IOS version should be moved from mobile/sniff to dojo/sniff
+	// TODO: get iOS version from dojo/sniff after #15827 is fixed
 	var ios4 = false;
 	if(has("ios")){
 		var ua = navigator.userAgent;
@@ -18,7 +18,7 @@ function(dojo, lang, aspect, dom, on, has, mouse, domReady, win){
 	var touchmove, hoveredNode;
 
 	if(hasTouch){
-		domReady(function(){
+		ready(function(){
 			// Keep track of currently hovered node
 			hoveredNode = win.body();	// currently hovered node
 
@@ -66,16 +66,13 @@ function(dojo, lang, aspect, dom, on, has, mouse, domReady, win){
 			});
 		});
 
-		// Define synthetic touchmove event that unlike the native touchmove, fires for the node the finger is
+		// Define synthetic touch.move event that unlike the native touchmove, fires for the node the finger is
 		// currently dragging over rather than the node where the touch started.
 		touchmove = function(node, listener){
 			return on(win.doc, "touchmove", function(evt){
 				if(node === win.doc || dom.isDescendant(hoveredNode, node)){
-					listener.call(this, lang.mixin({}, evt, {
-						target: hoveredNode,
-						preventDefault: function(){evt.preventDefault();},
-						stopPropagation: function(){evt.stopPropagation();}
-					}));
+					evt.target = hoveredNode;
+					listener.call(this, evt);
 				}
 			});
 		};

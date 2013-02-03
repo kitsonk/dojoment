@@ -75,12 +75,11 @@ define([
 				// dijitInputField class gives placeHolder same padding as the input field
 				// parent node already has dijitInputField class but it doesn't affect this <span>
 				// since it's position: absolute.
-				this._phspan = domConstruct.create('span',{className:'dijitPlaceHolder dijitInputField'},this.textbox,'after');
+				this._phspan = domConstruct.create('span',{ onmousedown:function(e){ e.preventDefault(); }, className:'dijitPlaceHolder dijitInputField'},this.textbox,'after');
 			}
 			this._phspan.innerHTML="";
 			this._phspan.appendChild(this._phspan.ownerDocument.createTextNode(v));
 			this._updatePlaceHolder();
-			this.applyTextDir(this._phspan);
 		},
 
 		_updatePlaceHolder: function(){

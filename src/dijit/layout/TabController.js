@@ -98,9 +98,6 @@ define([
 			this.inherited(arguments);
 			if(!this.showLabel && !this.params.title){
 				this.iconNode.alt = lang.trim(this.containerNode.innerText || this.containerNode.textContent || '');
-				if(this.textDir){
-					this.applyTextDir(this.iconNode, this.iconNode.alt);
-				}
 			}
 		}
 	});

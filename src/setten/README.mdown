@@ -46,8 +46,8 @@ $ node tests
 
 ### setten/dfs ###
 
-This is a wrapper for the NodeJS `fs` module, that takes the asynchronous calls and converts them into 
-a `dojo/promise` Promise based return.
+This is a wrapper for the NodeJS `fs` module, that takes the asynchronous callback calls and converts them into a
+`dojo/promise` Promise based return.
 
 For example, you might have written code like this in "plain" NodeJS:
 
@@ -71,6 +71,40 @@ require(["setten/dfs"], function(dfs){
 	});
 });
 ```
+
+### setten/util ###
+
+This is a utility library used internerally within the package.  It provides a convience function that converts
+callback functions into a `dojo/promise` Promise return.  It would work like this:
+
+```js
+require(["setten/util"], function(util){
+	var fn = function(data, callback){
+		// do something async
+		callback(err, info);
+	}
+
+	var pfn = util.asDeferred(fn, this, false);
+
+	pfn("something").then(function(info){
+		// async return
+	}, function(err){
+		// handle error
+	});
+});
+```
+
+The arguments for `asDeferred()` are:
+
+ Argument | Type     | Description
+----------|----------|--------------------------------------------------------------------------------------
+fn        | Function | The function whos return should be converted to a Promise.
+self      | Object?  | The scope to be used in conjunction with the function.  Defaults to `this`.
+noError   | Boolean? | `true` if the callback does not include an ``error`` argument.  Defaults to `false`.
+
+Because promises can only be fulfilled with a single value, if the callback is called with more than one argument
+(minus the error argument) then the promise is fulfilled with the supplied arguments as an array, otherwise it just 
+fufills with the single argument it was passed.
 
 [license]: https://github.com/kitsonk/setten/blob/master/LICENSE
 [cpm]: https://github.org/kriszyp/cpm

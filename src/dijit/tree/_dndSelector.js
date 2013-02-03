@@ -6,12 +6,11 @@ define([
 	"dojo/_base/kernel",	// global
 	"dojo/_base/lang", // lang.hitch
 	"dojo/cookie", // cookie
-	"dojo/dom", // isDescendant
 	"dojo/mouse", // mouse.isLeft
 	"dojo/on",
 	"dojo/touch",
 	"./_dndContainer"
-], function(array, connect, declare, Deferred, kernel, lang, cookie, dom, mouse, on, touch, _dndContainer){
+], function(array, connect, declare, Deferred, kernel, lang, cookie, mouse, on, touch, _dndContainer){
 
 	// module:
 	//		dijit/tree/_dndSelector
@@ -100,13 +99,10 @@ define([
 		},
 		removeTreeNode: function(/*dijit/Tree._TreeNode*/ node){
 			// summary:
-			//		remove node and it's descendants from current selection
+			//		remove node from current selection
 			// node: Node
 			//		node to remove
-			var newSelection = array.filter(this.getSelectedTreeNodes(), function(selectedNode){
-				return !dom.isDescendant(selectedNode.domNode, node.domNode); // also matches when selectedNode == node
-			});
-			this.setSelection(newSelection);
+			this.setSelection(this._setDifference(this.getSelectedTreeNodes(), [node]));
 			return node;
 		},
 		isTreeNodeSelected: function(/*dijit/Tree._TreeNode*/ node){
@@ -208,8 +204,14 @@ define([
 			// ignore click on expando node
 			if(!this.current || this.tree.isExpandoNode(e.target, this.current)){ return; }
 
-			// ignore right-click
-			if(e.type != "touchstart" && !mouse.isLeft(e)){ return; }
+			if(mouse.isLeft(e)){
+				// Prevent text selection while dragging on desktop, see #16328.   But don't call preventDefault()
+				// for mobile because it will break things completely, see #15838.
+				e.preventDefault();
+			}else if(e.type != "touchstart"){
+				// Ignore right click
+				return;
+			}
 
 			var treeNode = this.current,
 			  copy = connect.isCopyKey(e), id = treeNode.id;
