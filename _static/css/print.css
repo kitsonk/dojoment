@@ -1,0 +1,17 @@
+@import url(site.css);
+
+#header, #navFoot, #foot {
+    display:none;
+}
+
+#intro .line {
+    padding-top:0px; /* less space on top of a printed page */
+}
+
+marquee {
+    -moz-binding: none;
+}
+
+body * { 
+    overflow: visible !important;
+}

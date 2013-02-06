@@ -1,6 +1,6 @@
 define([
 	"dojo/promise/all",
-	"setten/dfs"
+	"setten/dfs-extra"
 ], function(all, dfs){
 
 	var walk = function(dir, match){

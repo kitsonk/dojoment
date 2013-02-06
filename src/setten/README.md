@@ -72,6 +72,11 @@ require(["setten/dfs"], function(dfs){
 });
 ```
 
+### setten/dfs-extra ###
+
+This is a wrapper for the [fs-extra][fsextra] module.  This takes the extra functions provides by this libarary and
+provides a `dojo/promise` based return.
+
 ### setten/util ###
 
 This is a utility library used internerally within the package.  It provides a convience function that converts
@@ -110,3 +115,4 @@ fufills with the single argument it was passed.
 [cpm]: https://github.org/kriszyp/cpm
 [volo]: http://volojs.org/
 [doh]: http://dojotoolkit.org/reference-guide/1.8/util/doh.html
+[fsextra]: https://github.com/jprichardson/node-fs-extra

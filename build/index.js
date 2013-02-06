@@ -22,6 +22,9 @@ dojoConfig = {
 		name: "dojoment-server",
 		location: "dojoment-server"
 	},{
+		name: "marked",
+		location: "marked"
+	},{
 		name: "build",
 		location: "../build"
 	}],

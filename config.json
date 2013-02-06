@@ -7,12 +7,13 @@
 			"basePath": "refdocs",
 			"rootUrl": "/",
 			"title": "Dojo Toolkit Reference Guide",
-			"copyright": "Copyright &copy; Dojo Toolkit 2004-2012",
-			"cdn": "//ajax.googleapis.com/ajax/libs/dojo/1.8.0/",
+			"copyright": "Copyright &copy; Dojo Toolkit 2004-2013",
+			"cdn": "//ajax.googleapis.com/ajax/libs/dojo/1.8.3/",
 			"bugs": "https://github.com/kitsonk/dojoment/issues",
 			"feedback": ""
 		},
 		"port": 8002,
+		"libRoot": "src",
 		"git": {
 			"pullEnabled": 0,
 			"updateUrl": "pull",

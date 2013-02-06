@@ -86,6 +86,7 @@ define([
 					return dfs.readFile(docFileName, "utf8").then(function(data){
 						var parsedDoc = docutil.parse(data);
 						response.render("wiki", {
+							root: config.libRoot,
 							title: parsedDoc.title,
 							crumbs: docutil.crumbs(request.params[0].replace(/\/(index(\.md)?)?$/, "")),
 							toc: parsedDoc.toc,

@@ -1,0 +1,179 @@
+@import url("../lib/dojoment-client/resources/client.css")
+@import url("../Font-Awesome/css/font-awesome.css")
+@import "nib"
+
+light-gray-bg-color = #f7f7f7
+blockquote-color = #d3d3d3
+dark-gray-border-color = #999999
+link-color = #000080
+
+blockquote
+  border-top none
+  border-bottom none
+  border-left 2px solid blockquote-color
+  margin 1em 0
+  padding 0.25em 1em
+  font-size 1em
+
+.accessibilityNode
+  display none
+
+#header ul
+  bottom 4px !important
+
+.dtkVersion
+  padding 1em 1em 0 1em
+
+.sidebar
+  font-size 14px
+  h4
+    font-weight normal
+  ul li
+    padding 0 !important
+    margin 0.5em 0
+
+#foot
+  margin-top 10px
+  font-size 0.8em
+  color #333333
+  height 24px
+  left 0
+  .footer
+    border-top 1px solid #cccccc
+    margin-top 20px !important
+    margin-bottom 10px
+    padding-top 13px
+
+.claro
+  pre
+    background-color light-gray-bg-color
+    box-shadow 0 4px 4px -3px rgba(black, 0.5)
+    font-family "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace
+    line-height 1.1em
+    font-size 13px
+    padding 10px
+    margin 2em 0
+    overflow auto
+    > code
+      border none
+      background none
+      font-size 100%
+      padding 0
+  code
+    background-color light-gray-bg-color
+    font-family "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace
+    font-size 95%
+    padding 2px
+  .CodeGlassRun
+  .CodeGlassCode
+  .CodeGlassCollapse
+  .CodeGlassExport 
+    margin 0 10px 10px 0
+    padding 4px 8px 4px 10px
+    &hover
+      color #0033dd
+      border-color #cccccc
+  .CodeGlassExport 
+    display block
+    float right
+    margin -6px auto 0 0
+  .CodeGlassWrap
+    margin-top 2em
+  .dijitDialog .dijitTabPaneWrapper > .dijitContentPane 
+    padding 0
+    overflow hidden
+    .dijitContentPane 
+      margin 0
+      padding 0
+      overflow hidden
+    textarea
+      padding 0.5em
+      border none
+      font-family "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace
+      line-height 1.1em
+      font-size 13px
+      height 99%
+      width 99%      
+  .dijitDialogPaneContent 
+    font-size 14px
+
+.toc_header 
+  border 1px solid #aaaaaa
+  box-shadow 0 1px 1px rgba(black, 0.15)
+  border-radius 4px
+  margin 0 0 10px 0
+  padding 4px
+  color black
+  text-align center
+  background-color #EEEEEE
+  background-image linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216))
+
+.toc_content 
+  font-size 14px !important
+  margin-top 1em
+  > ul 
+    margin 0
+    padding 0
+    > li 
+      display block
+      ul 
+        padding-left 1.5em
+      li 
+        color #999999
+  a 
+    color #666666
+
+#main
+  font-size 16px
+  margin-bottom 1.5em
+  h1
+  h2
+  h3
+  h4
+  h5
+  h6
+    a:hover
+      text-decoration none
+  .subnav
+    font-size 14px
+  table
+    border-collapse collapse
+    border-bottom 1px solid #cccccc
+    thead
+      th
+        font-weight bold
+        padding 0.4em
+        background-color #eeeeee
+        background-image linear-gradient(top, rgb(240, 240, 240), rgb(216, 216, 216))
+        border-bottom 1px solid #cccccc
+        border-top 1px solid #cccccc
+    tbody
+      tr:nth-child(even)
+        background #f3f3f3
+      td
+        padding 0.2em
+        vertical-align top
+    &.vertical
+      border-bottom none
+      margin 2em 0
+      tbody
+        tr:nth-child(even)
+          background none
+        th
+          font-weight bold
+          padding 0.2em 0.4em
+          background-color #eeeeee
+          border-right 2px solid #cccccc
+          text-align right
+
+.lang-codeglass > textarea 
+  display none
+
+.CodeGlass 
+  border 1px solid #d3d3d3
+  margin 1.5em 0
+  padding 12px 6px
+  box-shadow 0 4px 4px -3px rgba(0, 0, 0, 0.5)
+  pre 
+    box-shadow none
+    margin 0.5em 0

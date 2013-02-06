@@ -96,7 +96,6 @@ define([
 					continue;
 				}
 				if(cap = paragraph.exec(code)){
-					console.log('paragraph', stripIndent(cap[0]));
 					code = code.substring(cap[0].length);
 					output.push("<p>" + marked.InlineLexer.output(stripIndent(cap[0]), {}) + "</p>\n");
 					continue;

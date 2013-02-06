@@ -15,7 +15,7 @@ block scripts
   script(type="text/javascript")
     dojoConfig = {
       async: 1,
-      baseUrl: "/src/",
+      baseUrl: "/#{root}/",
       cdn: "#{cdn}",
       packages: [{
         name: "dojo",
@@ -29,7 +29,7 @@ block scripts
       }],
       deps: ["dojoment-client/main"]
     };
-  script(type="text/javascript", src="/src/dojo/dojo.js")
+  script(type="text/javascript", src="/#{root}/dojo/dojo.js")
 
 block content
   .refdoc_wrap

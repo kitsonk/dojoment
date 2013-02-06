@@ -1,0 +1,93 @@
+extends main
+
+append head
+  meta(name="keywords", content="The Dojo Toolkit, dojo, JavaScript Framework")
+  meta(name="description", content="")
+  meta(name="author", content="Dojo Foundation")
+  meta(name="copyright", content="#{copyright}")
+  meta(name="company", content="Dojo Foundation")
+
+block css
+  link(rel="stylesheet", type="text/css", href="#{root}/_static/css/guide.css", media="all")
+  link(rel="stylesheet", type="text/css", href="#{root}/_static/css/site.css", media="screen")
+  link(rel="stylesheet", type="text/css", href="#{root}/_static/css/print.css", media="print")
+  link(rel="stylesheet", type="text/css", href="#{root}/_static/css/highlight.css", media="all")
+
+block scripts
+  script(type="text/javascript")
+    dojoConfig = {
+      async: 1,
+      baseUrl: "#{root}/_static/lib",
+      cdn: "#{cdn}",
+      packages: [{
+        name: "dojo",
+        location: "dojo"
+      },{
+        name: "dijit",
+        location: "dijit"
+      },{
+        name: "dojoment-client",
+        location: "dojoment-client"
+      }],
+      deps: ["dojoment-client/main"]
+    };
+  script(type="text/javascript", src="#{root}/_static/lib/dojo/dojo.js")
+
+block header
+  .accessibilityNode
+    a(href="#intro") Skip to Content
+    | | 
+    a(href="#nav") Skip to Navigation
+  hr.hide
+  #page.docPage
+    #header
+      .container
+        span#logo
+          a(title="Home", href="http://dojotoolkit.org")
+            img(alt="Dojo Toolkit", src="#{root}/_static/images/logo.png")
+        ul#navigation
+          li.home: a(href="/"): span.homeIcon
+          li.download: a(href="/download/") Download
+          li.features: a(href="/features/") Features
+          li.docs.active: a(href="/documentation/") Documentation
+          li.community: a(href="/community/") Community
+          li.about: a(href="/blog/") Blog
+
+block content
+  hr.hide
+  #main
+    #content.innerBox
+      .pageTitleContainer
+        h1 Documentation
+        ul.subnav
+          li: a(href="/documentation/"): span Tutorials
+          li.selected: a(href="/reference-guide/"): span Reference Guide
+          li: a(href="/api/"): span API Documentation
+      .line
+        .unit.size3of4.firstUnit
+          .spacer !{doc}
+        .sidebar.unit.size1of4.lastUnit
+          h4 Reference Guide
+          .dtkVersion
+            label(for="refver") Dojo Version
+            select#refver(name="refver")
+              option(value="1.6") 1.6
+              option(value="1.7") 1.7
+              option(value="1.8") 1.8
+              option(value="1.9", selected="selected") 1.9
+          ul
+            li: a(href="#{root}/") Startpage
+            li: a(href="#{root}/dojo/") Dojo
+            li: a(href="#{root}/dijit/") Dijit
+            li: a(href="#{root}/dojox/") DojoX
+          h4 Contents
+          .toc_content !{toc}
+
+block footer
+  hr.hide
+  #foot
+    .innerBox
+      script(type="text/javascript")
+        document.write('<a href="https://docs.google.com/spreadsheet/viewform?hl=en_US&amp;formkey=dFlDcHEyaHMwbEd4MFBObkNrX0E1MFE6MQ&amp;entry_0=' + encodeURIComponent(window.location.href) + '">Error in the documentation? Can\'t find what you are looking for? Let us know!</a>');
+      .footer !{copyright}
+  script(src="http://www.google.com/jsapi?key=ABQIAAAAbTW5DVaTIHKHQe5Q75sB0BSaOaO_TgJ5c3mtQFnk5JO2zD5dZBSGHlRJ8HAPlCQCEO_FxSmyNAHSLw", text="text/javascript")

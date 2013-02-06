@@ -1,5 +1,5 @@
 define([
-	'dojo/node!fs',
+	'dojo/node!fs-extra',
 	'./util'
 ], function (fs, util) {
 
