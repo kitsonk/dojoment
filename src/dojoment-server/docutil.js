@@ -178,18 +178,18 @@ define([
 
 		getCrumbs = function(path, basePath){
 			if(!path || /index(\.mdown)?/.test(path)){
-				return '<i class="icon-home"></i>';
+				return '<i class="fa fa-home"></i>';
 			}else{
 				path = path.split("/");
 				var l = path.length,
-					output = '<a href="/"><i class="icon-home"></i></a> ',
+					output = '<a href="/"><i class="fa fa-home"></i></a> ',
 					curpath = basePath || "/";
 				path.forEach(function(item, i){
 					if(i !== (l - 1)){
 						curpath += item + "/";
-						output += ' <i class="icon-chevron-right"></i> <a href="' + curpath + '">' + item + '</a>';
+						output += ' <i class="fa fa-chevron-right"></i> <a href="' + curpath + '">' + item + '</a>';
 					}else{
-						output += ' <i class="icon-chevron-right"></i> ' + item;
+						output += ' <i class="fa fa-chevron-right"></i> ' + item;
 					}
 				});
 				return output;

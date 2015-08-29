@@ -164,12 +164,11 @@ h6 > a {
   color: #000;
   text-align: center;
   background-color: #eee;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f0f0f0), color-stop(1, #d8d8d8));
-  background-image: -webkit-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: -o-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: -ms-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
+  background-image: -webkit-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: -moz-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: -o-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: -ms-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: linear-gradient(to bottom, #f0f0f0, #d8d8d8);
 }
 .toc_content {
   font-size: 0.95em;
@@ -205,12 +204,11 @@ h6 > a {
   font-weight: bold;
   padding: 0.4em;
   background-color: #eee;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f0f0f0), color-stop(1, #d8d8d8));
-  background-image: -webkit-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: -moz-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: -o-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: -ms-linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
-  background-image: linear-gradient(top, #f0f0f0 0%, #d8d8d8 100%);
+  background-image: -webkit-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: -moz-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: -o-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: -ms-linear-gradient(top, #f0f0f0, #d8d8d8);
+  background-image: linear-gradient(to bottom, #f0f0f0, #d8d8d8);
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #ccc;
 }
